@@ -1,0 +1,72 @@
+<h3>Products       <button (click)="this.getAllProduct()" class="btn btn-primary" style="margin-right: 10px" >Obtener Productos</button>
+      <button type="button" class="btn btn-primary" (click)="this.NewProduct()">Agregar Nuevo</button>
+</h3>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Product Type Id</th>
+        <th>Type Description</th>
+        <th>Commands</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of this.products  | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td>{{product.id}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.productTypeId}}</td>
+          <td>{{product.productTypeDescription}}</td>
+          <td>
+            <fa-icon [icon]="eyeIcon" (click)="this.EditProduct(product.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+            <fa-icon [icon]="timeIcon" (click)="this.ShowDeleteConfirm(product.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+  <app-modal #modal1 class="ij_modal">
+    <div class="app-modal-header">
+      Crear o editar un producto
+    </div>
+    <div class="app-modal-body">
+
+        <label for="description">Description</label>
+        <input type="text"  class="form-control" [(ngModel)]= "product.description"/>
+
+        <label>Price</label>
+        <input type="text" class="form-control" [(ngModel)]= "product.price" />
+
+        <label>Product Type</label>
+        <select  class="form-control" [(ngModel)]="product.productTypeId">
+          <option *ngFor="let producttype of this.productsTypes" [value]="producttype.id" > {{producttype.description}} </option>
+        </select>
+        <label for="imagen">Imagen</label>
+        <input type="file" class="form-control" [(ngModel)]="product.description" />
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal1.hide()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="SaveChanges(); modal1.hide();">Guardar Cambios</button>
+    </div>
+  </app-modal>
+
+  <app-modal #modal2 class="ij_modal">
+    <div class="app-modal-header">
+      Add new Team
+    </div>
+    <div class="app-modal-body">
+      Are you sure wants delete record?
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal2.hide()">No</button>
+      <button type="button" class="btn btn-primary" (click)="DeleteProduct(); modal2.hide();">Yes</button>
+    </div>
+  </app-modal>
+
+
+  <!-- <input type="file" class="form-control" [(ngModel)]= "this.archivo" /> -->
+  <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+  <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>

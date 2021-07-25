@@ -1,0 +1,6 @@
+TODOS:
+1) JWT Angular 7 - ASPNet Core 2.
+2) Unit Test 
+3) 
+4) Karma Jasmine
+5) 

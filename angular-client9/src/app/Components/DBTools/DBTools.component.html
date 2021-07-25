@@ -1,0 +1,32 @@
+<ul id="terminalpanel" class="terminal">
+  <li *ngFor="let txt of this.texto">
+    {{txt}}
+  </li>
+</ul>
+<div style="margin-top: 10px">
+  <button type="button" class="btn btn-primary" (click)="this.CreateInitialData()">Crear Datos iniciales</button>
+  <button type="button" style="margin-left: 10px;" class="btn btn-primary" (click)="this.DbInitialSalePointStockData()">Inicializar puntos de venta y su stock</button>
+
+</div>
+<div style="margin-top: 10px">
+</div>
+<div style="margin-top: 10px">
+  <button (click)="this.SimulateSales()" class="btn btn-primary" style="margin-right: 10px" >Simular ventas</button>
+  Cantidad: <input type="text" id="amountSales"  [(ngModel)] = "amountSales" />
+  Mes: <input type="text" id="monthSales"  [(ngModel)] = "monthSales" />
+  Año: <input type="text" id="yearSales"  [(ngModel)] = "yearSales" />
+</div>
+<div style="margin-top: 10px">
+  <button type="button" class="btn btn-primary" (click)="this.SimulateSearches()">Simular intenciones de compra</button>
+  Cantidad: <input type="text" id="amountSearch"  [(ngModel)] = "amountSearch" />
+  Mes: <input type="text" id="monthSearch"  [(ngModel)] = "monthSearch" />
+  Año: <input type="text" id="yearSearch"  [(ngModel)] = "yearSearch" />
+</div>
+<div style="margin-top: 10px">
+  <button type="button" class="btn btn-success" (click)="this.executeProcess()">Simular todo el proceso</button>
+</div>
+
+
+<div class="mydiv" [style.visibility]="this.loading?'visible':'hidden'">
+  <img src='../../../assets/ajax-loader.gif'>
+</div>

@@ -1,0 +1,14 @@
+﻿delete from sales;
+delete from Searches;
+delete from Stocks;
+delete from SalePoints;
+delete from Countries;
+delete from Products;
+delete from ProductTypes;
+delete from Users;
+delete from categories;
+delete from Budget;
+DBCC CHECKIDENT (SalePoints, RESEED, 0);
+DBCC CHECKIDENT (Countries, RESEED, 0);
+DBCC CHECKIDENT (Stocks, RESEED, 0);
+DBCC CHECKIDENT (categories, RESEED, 0);

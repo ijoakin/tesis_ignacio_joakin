@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].[Users] (id, [UserName],[Password]) VALUES (1, 'ijoakin','Ignacio')

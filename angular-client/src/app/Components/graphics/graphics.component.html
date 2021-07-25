@@ -1,0 +1,31 @@
+<h1>
+  gaphs
+</h1>
+
+<button (click)="this.GetDataToGraph()">Obtener datos</button>
+<plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+<div class="table-responsive" style="display: none;">
+    <table class="table">
+      <thead>
+        <th>Año</th>
+        <th>Mes</th>
+        <th>Venta Efectiva</th>
+        <th>Cantidad</th>
+        <th>Commands</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let search of this.graphList  | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td>{{search.year}}</td>
+          <td>{{search.month}}</td>
+          <td>{{search.success}}</td>
+          <td>{{search.amount}}</td>
+          <td>
+            <i class="fa fa-eye"  data-toggle="modal" data-target="#myModal"></i>
+            <i class="fa fa-times"  aria-hidden="true"></i>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+

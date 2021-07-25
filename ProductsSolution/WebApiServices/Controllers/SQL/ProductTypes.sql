@@ -1,0 +1,1 @@
+﻿INSERT INTO ProductTypes(id, [Description]) values (1, 'Product type 1');

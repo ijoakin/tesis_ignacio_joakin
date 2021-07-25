@@ -1,0 +1,1 @@
+﻿INSERT INTO Budget (description,amount,currentmonth,currentyear) values ('initial budget', 100000, 1,1990);

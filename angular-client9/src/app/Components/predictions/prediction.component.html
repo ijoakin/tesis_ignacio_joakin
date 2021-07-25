@@ -1,0 +1,30 @@
+<h2>Predictions       <button type="button" class="btn btn-primary" (click)="this.ApplyAllPredictions()">Apply all predictions</button>
+</h2>
+ <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>Id</th>
+        <th>productid</th>
+        <th>product</th>
+        <th>salepointid</th>
+        <th>salepoint</th>
+        <th>date</th>
+        <th>applied</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prediction of this.predictions  | paginate: { itemsPerPage: 10, currentPage: p }">
+          <td>{{prediction.id}}</td>
+          <td>{{prediction.productid}}</td>
+          <td>{{prediction.product}}</td>
+          <td>{{prediction.salepointid}}</td>
+          <td>{{prediction.salepoint}}</td>
+          <td>{{prediction.date}}</td>
+          <td><input type="checkbox" [(ngModel)]="prediction.applied" disabled/></td>
+          <td>
+            <i class="fa fa-eye" (click)="this.ApplyPrediction(prediction.id)" data-toggle="modal" data-target="#myModal"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>

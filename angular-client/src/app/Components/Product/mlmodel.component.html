@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>country</th>
+      <th>product</th>
+      <th>stockAmount</th>
+      <th>price</th>
+      <th>Commands</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mlModel of this.arrMLModel  | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td>{{mlModel.country}}</td>
+        <td>{{mlModel.product}}</td>
+        <td>{{mlModel.stockAmount}}</td>
+        <td>{{mlModel.price}}</td>
+        <td>
+          <i class="fa fa-eye"  data-toggle="modal" data-target="#myModal"></i>
+          <i class="fa fa-times"  aria-hidden="true"></i>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

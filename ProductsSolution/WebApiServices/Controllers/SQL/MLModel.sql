@@ -1,0 +1,1 @@
+CREATE VIEW MLModel as (SELECT s.[month], s.[year], sp.id as salepoint, p.id as product, s.success, sum(s.amount) as amount FROM products p inner join searches s on p.id = s.productId inner join salepoints sp on s.salepointid = sp.id group by s.[month], s.[year],sp.id, p.id, s.success)

@@ -1,0 +1,22 @@
+<h2>Countries</h2>
+<div class="table-responsive">
+  <table class="table">
+  <thead>
+    <th>id</th>
+    <th>description</th>
+    <th>category</th>
+    <th>code</th>
+    <th>Commands</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of this.Countries | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{ user.id }}</td>
+      <td>{{ user.description }}</td>
+      <td>{{ user.category }}</td>
+      <td>{{ user.code }}</td>
+      <td><i class="fa fa-eye"><i class="fa fa-times"></i></i></td>
+    </tr>
+  </tbody>
+</table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

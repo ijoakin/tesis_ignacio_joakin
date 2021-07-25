@@ -1,0 +1,26 @@
+<h2>Sales Points</h2>
+<div class="table-responsive">
+  <table class="table">
+  <thead>
+    <th>id</th>
+    <th>description</th>
+    <th>Address</th>
+    <th>countryId</th>
+    <th>country</th>
+    <th>countryCategory</th>
+    <th>Commands</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let salepoint of this.salepoints | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{ salepoint.id }}</td>
+      <td>{{ salepoint.description }}</td>
+      <td>{{ salepoint.address }}</td>
+      <td>{{ salepoint.countryId }}</td>
+      <td>{{ salepoint.country }}</td>
+      <td>{{ salepoint.countryCategory }}</td>
+      <td><i class="fa fa-eye"><i class="fa fa-times"></i></i></td>
+    </tr>
+  </tbody>
+</table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

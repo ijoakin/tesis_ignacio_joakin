@@ -1,0 +1,5 @@
+1. Verb in imperative.
+2. Don't use a dot or ellipsis.
+3. Make it short and concise. Below 50 characters.
+4. Add a message body if necessary.
+5. Use commitlint and husky to make sure you follow a defined style.

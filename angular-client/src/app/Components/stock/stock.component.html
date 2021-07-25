@@ -1,0 +1,29 @@
+<h3>Stock  <button id="getAllStock" (click)="this.getAllStock()" class="btn btn-primary" style="margin-right: 10px" >Get Stock</button>
+</h3>
+<div class='table-resposive'>
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>productid</th>
+    <th>productDescription</th>
+    <th>salePointId</th>
+    <th>salePointDescription</th>
+    <th>amount</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let search of this.stocks | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{search.id}}</td>
+      <td>{{search.productId}}</td>
+      <td>{{search.productDescription}}</td>
+      <td>{{search.salePointId}}</td>
+      <td>{{search.salePointDescription}}</td>
+      <td>{{search.amount}}</td>
+    <td>
+        <i class="fa fa-eye" data-toggle="modal" data-target="#myModal"></i>
+        <i class="fa fa-times" aria-hidden="true"></i>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

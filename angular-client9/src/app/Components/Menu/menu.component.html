@@ -1,0 +1,62 @@
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Your Choice SA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tablas de sistema
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/products">Productos</a>
+                        <a class="dropdown-item" routerLink="/sales">Ventas</a>
+                        <a class="dropdown-item" routerLink="/salepoint">Puntos de ventas</a>
+                        <a class="dropdown-item" routerLink="/countries">Paises</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" routerLink="/search">Intenciones de compra</a>
+                        <a class="dropdown-item" routerLink="/stock">Stock</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" routerLink="/predictions">Predicciones</a>
+                        <a class="dropdown-item" routerLink="/distance">Movimientos de productos</a>
+                      </div>
+                    </li>
+                <!-- <li class="nav-item active">
+                  <a class="nav-link" routerLink="/products">Testing <span class="sr-only">(current)</span></a>
+                </li> -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Seguridad
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/server">Registros</a>
+                    <a class="dropdown-item" routerLink="/users">Usuarios</a>
+                    <a class="dropdown-item" routerLink="/users">Roles</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/users">Seguridad</a>
+                  </div>
+                </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Herramientas de sistema
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" routerLink="/dbtools">Herramientas de Base de datos</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item"  routerLink="/mlModel">Machine Learning</a>
+                      <a class="dropdown-item"  routerLink="/graphs">Graficos</a>
+                    </div>
+                  </li>
+
+                <li class="nav-item">
+                  <a routerLink="/singin" class="nav-link" [style.display]="this.isLoginVisible()?'block':'none'">Ingresar</a>
+                  <a routerLink="/" (click)="this.logOutClick()" class="nav-link" [style.display]="!this.isLoginVisible()?'block':'none'">Salir</a>
+                </li>
+              </ul>
+
+            </div>
+          </nav>

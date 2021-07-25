@@ -1,0 +1,81 @@
+<h3>Sales     <button (click)="this.getAllSales()" class="btn btn-primary" style="margin-right: 10px" >Get Sales</button>
+    <button type="button" class="btn btn-primary" (click)="this.NewSale()">Add new Sale</button>
+</h3>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Id</th>
+      <th>Product</th>
+      <th>SalePointDescription</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Month</th>
+      <th>Year</th>
+      <th>Commands</th>
+    </thead>
+  <tbody>
+      <tr *ngFor="let sale of this.sales | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total  }">
+        <td>{{sale.id}}</td>
+        <td>{{sale.productDescription}}</td>
+        <td>{{sale.salePointDescription}}</td>
+        <td>{{sale.amount}}</td>
+        <td>{{sale.date}}</td>
+        <td>{{sale.month}}</td>
+        <td>{{sale.year}}</td>
+        <td>
+          <i class="fa fa-eye" (click)="this.EditSale(sale.id)" data-toggle="modal" data-target="#myModal"></i>
+          <i class="fa fa-times" (click)="this.ShowDeleteConfirm(sale.id)" aria-hidden="true"></i>
+         </td>
+      </tr>
+  </tbody>
+  </table>
+<pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+  <div class="mydiv" [style.visibility]="this.loading?'visible':'hidden'">
+    <img src='../../assets/ajax-loader.gif'>
+  </div>
+</div>
+
+<app-modal #modal1 class="ij_modal">
+  <div class="app-modal-header">
+    Add new Sale
+  </div>
+  <div class="app-modal-body">
+      <label for="description">ID</label>
+      <input type="text"  class="form-control" [(ngModel)]= "sale.id"/>
+
+      <label>Product</label>
+      <select  class="form-control" [(ngModel)]="sale.salePointId">
+        <option value="1">Product</option>
+        <option *ngFor="let p of this.products" [value]="p.id" > {{p.description}} </option>-->
+      </select>
+
+      <label for="description">Amount</label>
+      <input type="text"  class="form-control" [(ngModel)]= "sale.amount"/>
+
+      <label>Date</label>
+      <input type="text" class="form-control" [(ngModel)]= "sale.date" />
+
+      <label>Sale Point</label>
+      <select  class="form-control" [(ngModel)]="sale.salePointId">
+        <option value="1">Sale Point 1</option>
+        <!--<option *ngFor="let producttype of this.productsTypes" [value]="producttype.id" > {{producttype.description}} </option>-->
+      </select>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal1.hide()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="SaveChanges(); modal1.hide();">Save changes</button>
+  </div>
+</app-modal>
+
+<app-modal #modal2 class="ij_modal">
+  <div class="app-modal-header">
+    Add new Team
+  </div>
+  <div class="app-modal-body">
+    Are you sure wants delete record?
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal2.hide()">No</button>
+    <button type="button" class="btn btn-primary" (click)="DeleteSale(); modal2.hide();">Yes</button>
+  </div>
+</app-modal>

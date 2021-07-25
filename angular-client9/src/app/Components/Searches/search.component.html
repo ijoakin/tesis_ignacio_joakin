@@ -1,0 +1,41 @@
+<h3>Intenciones de compras  <button id="getAllSearches" (click)="this.getAllSearches()" class="btn btn-primary" style="margin-right: 10px" > Obtener Datos</button>
+</h3>
+<div class='table-resposive'>
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>searchtext</th>
+    <th>success</th>
+    <th>amount</th>
+    <th>ProductId</th>
+    <th>userid</th>
+    <th>productDescription</th>
+    <th>SalePointDescription</th>
+    <th>Month</th>
+    <th>Year</th>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let search of this.searches | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{search.id}}</td>
+      <td>{{search.searchtext}}</td>
+      <td>{{search.success}}</td>
+      <td>{{search.amount}}</td>
+      <td>{{search.ProductId}}</td>
+      <td>{{search.userid}}</td>
+      <td>{{search.productDescription}}</td>
+      <td>{{search.SalePointDescription}}</td>
+      <td>{{search.month}}</td>
+      <td>{{search.year}}</td>
+
+      <td>
+        <i class="fa fa-eye" data-toggle="modal" data-target="#myModal"></i>
+        <i class="fa fa-times" aria-hidden="true"></i>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
