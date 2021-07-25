@@ -134,7 +134,6 @@ namespace WebApiServices.Controllers
             }
 
         }
-            
 
         [HttpGet("SimulateExecuteProccessByProductYears")]
         public bool SimulateExecuteProccessByProductYears(int productId, int salePointId)
