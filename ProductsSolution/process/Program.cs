@@ -49,13 +49,22 @@ namespace process
         }
         static void RunPythonNotebook()
         {
+            var builder = new ConfigurationBuilder()
+                           .SetBasePath(Directory.GetCurrentDirectory())
+                           .AddJsonFile("appsettings.json");
+
+            var configuration = builder.Build();
+
+            string pythonExecutable = configuration["pythonExecutable"];
+            string pythonNotebook = configuration["pythonNotebook"];
+
             Console.WriteLine($"Executing Python notebook - predicciones 7 días - {DateTime.Now}");
-            var pythonExecution = @"C:\Python\python.exe";
+            var pythonExecution = pythonExecutable;
 
             using (System.Diagnostics.Process pProcess = new System.Diagnostics.Process())
             {
                 pProcess.StartInfo.FileName = pythonExecution;
-                pProcess.StartInfo.Arguments = "C:/devel2/products/PythonML/Tesis/modelo_final.py"; //argument
+                pProcess.StartInfo.Arguments = pythonNotebook; //argument
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.StartInfo.RedirectStandardOutput = true;
                 pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
@@ -99,6 +108,9 @@ namespace process
 
             int salePointId = int.Parse(configuration["salePointId"]);
             int productId = int.Parse(configuration["productId"]);
+
+            
+
             List<Task> tasks = new List<Task>();
             
             DatabaseToolsHelper helper = new DatabaseToolsHelper();
