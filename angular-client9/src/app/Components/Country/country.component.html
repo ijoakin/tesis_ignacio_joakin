@@ -20,3 +20,29 @@
 </table>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
+
+
+  <app-modal #modal1 class="ij_modal">
+    <div class="app-modal-header">
+      Crear o editar un país
+    </div>
+    <div class="app-modal-body">
+
+        <label for="description">Description</label>
+        <input type="text"  class="form-control" [(ngModel)]= "product.description"/>
+
+        <label>Price</label>
+        <input type="text" class="form-control" [(ngModel)]= "product.price" />
+
+        <label>Product Type</label>
+        <select  class="form-control" [(ngModel)]="product.productTypeId">
+          <option *ngFor="let producttype of this.productsTypes" [value]="producttype.id" > {{producttype.description}} </option>
+        </select>
+        <label for="imagen">Imagen</label>
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal1.hide()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="SaveChanges(); modal1.hide();">Guardar Cambios</button>
+    </div>
+  </app-modal>

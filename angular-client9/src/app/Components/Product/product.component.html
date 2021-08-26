@@ -45,7 +45,7 @@
           <option *ngFor="let producttype of this.productsTypes" [value]="producttype.id" > {{producttype.description}} </option>
         </select>
         <label for="imagen">Imagen</label>
-        <input type="file" class="form-control" [(ngModel)]="product.description" />
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
     </div>
     <div class="app-modal-footer">
       <button type="button" class="btn btn-default" (click)="modal1.hide()">Cerrar</button>
@@ -69,4 +69,4 @@
 
   <!-- <input type="file" class="form-control" [(ngModel)]= "this.archivo" /> -->
   <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
-  <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+
