@@ -66,6 +66,10 @@ export class PortalComponent implements OnInit {
     }
   }
 
+  public hideProduct() {
+    this.showProduct =false;
+  }
+
   public getProduct() {
     if (this.country.id !== 0 && this.product.id !== 0){
       this.showProduct = true;

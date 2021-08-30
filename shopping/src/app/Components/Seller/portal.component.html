@@ -2,14 +2,14 @@
 <div class="table-responsive">
     <div class="col-sm-4">
       Busqueda de productos:
-       <select  class="form-control" [(ngModel)]="product.id"  >
+       <select  class="form-control" [(ngModel)]="product.id" (change)="this.hideProduct()">
           <option *ngFor="let product of this.products" [value]="product.id" > {{product.description}} </option>
       </select>
       <br>
       Sucursal:
 
      <label>País</label>
-    <select  class="form-control" [(ngModel)]="country.id" >
+    <select  class="form-control" [(ngModel)]="country.id" (change)="this.hideProduct()">
       <option *ngFor="let c of this.countries" [value]="c.id" > {{c.description}} </option>
     </select>
       <div>

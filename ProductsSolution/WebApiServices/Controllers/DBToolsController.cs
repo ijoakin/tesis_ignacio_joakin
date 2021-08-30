@@ -69,9 +69,6 @@ namespace WebApiServices.Controllers
                 return false;
             }
         }
-        
-
-
 
         [HttpGet("SimulateFailSearches")]
         public bool SimulateFailSearches(int count, int month, int year)
@@ -86,6 +83,7 @@ namespace WebApiServices.Controllers
                 return false;
             }
         }
+
         [HttpGet("CreateInitialData")]
         public bool CreateInitialData()
         {
@@ -100,6 +98,7 @@ namespace WebApiServices.Controllers
                 return false;
             }
         }
+
         [HttpGet("SimulateExecuteProccess")]
         public bool SimulateExecuteProccess(string date, int count)
         {
@@ -112,8 +111,8 @@ namespace WebApiServices.Controllers
             {
                 return false;
             }
-            
         }
+
         [HttpGet("GetDataToGraph")]
         public async Task<IList<GraphDTO>> getDataToGraph()
         {
@@ -132,7 +131,6 @@ namespace WebApiServices.Controllers
             {
                 return false;
             }
-
         }
 
         [HttpGet("SimulateExecuteProccessByProductYears")]

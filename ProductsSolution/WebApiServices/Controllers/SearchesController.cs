@@ -1,5 +1,4 @@
-﻿using BusinessLogic;
-using DTO;
+﻿using DTO;
 using IBusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
