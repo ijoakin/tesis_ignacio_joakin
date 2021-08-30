@@ -1,0 +1,43 @@
+<h2>Movimientos de productos</h2>
+<div class="table-responsive">
+    <div class="col-sm-4">
+      Busqueda de productos:
+       <select  class="form-control" [(ngModel)]="product.id"  >
+          <option *ngFor="let product of this.products" [value]="product.id" > {{product.description}} </option>
+      </select>
+      <br>
+      Sucursal:
+
+     <label>País</label>
+    <select  class="form-control" [(ngModel)]="country.id" >
+      <option *ngFor="let c of this.countries" [value]="c.id" > {{c.description}} </option>
+    </select>
+      <div>
+        <button type="button" (click) = "this.getProduct()">Buscar</button>
+      </div>
+    </div>
+</div>
+
+<div class="wrapper" [style.display]="showProduct ? 'block' : 'none'">
+  <div class="product-img">
+    <img src="../../../assets/sub1.png" height="420" width="327">
+  </div>
+  <div class="product-info">
+    <div class="product-text">
+      <h1>{{this.product.description}}</h1>
+      <h2>by avenue tires depot</h2>
+      <p>Car Tires son una reintegración<br> de ruedas para todo tipo de terreno<br> las cuales pueden rodar en cualquier tipo de circunstancia, siendo estas mismas <br>para cualquier tipo de clima<br> permitiendo al usuario un manejo sin preocupaciones.</p>
+    </div>
+    <div style="font-size: small;text-align: center; color: red;" [style.display]="showNotStock ? 'block' : 'none'">
+      En este momento no se posee stock en esta sucursal
+    </div>
+    <div style="font-size: small;text-align: center; color: red;" [style.display]="showNotStock ? 'block' : 'none'">
+      En este momento se posee un stock de: {{this.stock.amount}}
+    </div>
+    <div class="product-price-btn">
+      <p><span>{{this.product.price}}</span>$</p>
+
+      <button type="button" disabled >Comprar ahora</button>
+    </div>
+  </div>
+</div>
