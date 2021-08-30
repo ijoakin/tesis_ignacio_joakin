@@ -70,8 +70,13 @@ export class PortalComponent implements OnInit {
     if (this.country.id !== 0 && this.product.id !== 0){
       this.showProduct = true;
 
+        this.productService.GetProductById(String(this.product.id))
+        .subscribe((data: Product) => {
+          this.product = data;
+        });
        this.stockService.GetStockBySalePointProduct(String(this.product.id), String(this.country.id))
         .subscribe((data: Stock) => {
+          debugger;
           this.stock = data;
           if (this.stock.amount <= 0){
             this.showNotStock=true;

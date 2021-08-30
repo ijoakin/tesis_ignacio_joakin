@@ -4,9 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using DTO;
-using Entities;
 using IBusinessLogic;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApiServices.Controllers

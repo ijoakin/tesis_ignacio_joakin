@@ -26,12 +26,15 @@
     <div class="product-text">
       <h1>{{this.product.description}}</h1>
       <h2>by avenue tires depot</h2>
-      <p>Car Tires son una reintegración<br> de ruedas para todo tipo de terreno<br> las cuales pueden rodar en cualquier tipo de circunstancia, siendo estas mismas <br>para cualquier tipo de clima<br> permitiendo al usuario un manejo sin preocupaciones.</p>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        <br > Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+      </p>
     </div>
     <div style="font-size: small;text-align: center; color: red;" [style.display]="showNotStock ? 'block' : 'none'">
       En este momento no se posee stock en esta sucursal
     </div>
-    <div style="font-size: small;text-align: center; color: red;" [style.display]="showNotStock ? 'block' : 'none'">
+    <div style="font-size: small;text-align: center; color: black;" [style.display]="!showNotStock ? 'block' : 'none'">
       En este momento se posee un stock de: {{this.stock.amount}}
     </div>
     <div class="product-price-btn">
