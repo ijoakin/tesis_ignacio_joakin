@@ -16,4 +16,12 @@ export class DistanceService {
 
     return this.http.get<Distance[]>(Url);
   }
+
+  public getAllDistancesByIdProductIdCountry(productid: string, countryid: string): Observable<Distance[]> {
+    const Url: string = environment.baseUrl + 'Country/getAllDistancesByIdProductIdCountry';
+
+    return this.http.get<Distance[]>(Url, { params : {productid: productid, countryid: countryid } });
+
+  }
+
 }

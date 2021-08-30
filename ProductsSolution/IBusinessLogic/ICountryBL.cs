@@ -8,9 +8,11 @@ namespace IBusinessLogic
 {
     public interface ICountryBL
     {
-
         Task<IList<CountryDTO>> GetAllCountryDTOs();
         Task<IList<DistanceDto>> GetDistanceDtosAsync();
-        Task<IList<DistanceDto>> GetDistanceByProductBySalePointDtosAsync(int product, int salePoint);
+        Task<IList<DistanceDto>> GetDistanceByProductBySalePointDtosAsync(int product, int countryId);
+        Task<IList<CategoryDto>> GetAllCategories();
+
+
     }
 }

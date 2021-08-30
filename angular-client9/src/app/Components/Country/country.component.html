@@ -1,4 +1,7 @@
-<h2>Paises</h2>
+<h2>Paises
+  <button (click)="this.getAllCountries()" class="btn btn-primary" style="margin-right: 10px" >Obtener Productos</button>
+      <button type="button" class="btn btn-primary" (click)="this.NewCountry()">Agregar Nuevo</button>
+</h2>
 <div class="table-responsive">
   <table class="table">
   <thead>
@@ -15,6 +18,10 @@
       <td>{{ user.category }}</td>
       <td>{{ user.code }}</td>
       <td><i class="fa fa-eye"><i class="fa fa-times"></i></i></td>
+        <td>
+            <fa-icon [icon]="eyeIcon" (click)="this.EditCountry(country.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+            <fa-icon [icon]="timeIcon" (click)="this.ShowDeleteConfirm(country.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+          </td>
     </tr>
   </tbody>
 </table>
@@ -29,20 +36,32 @@
     <div class="app-modal-body">
 
         <label for="description">Description</label>
-        <input type="text"  class="form-control" [(ngModel)]= "product.description"/>
+        <input type="text"  class="form-control" [(ngModel)]= "country.description"/>
 
-        <label>Price</label>
-        <input type="text" class="form-control" [(ngModel)]= "product.price" />
+        <label>Code</label>
+        <input type="text" class="form-control" [(ngModel)]= "country.code" />
 
-        <label>Product Type</label>
-        <select  class="form-control" [(ngModel)]="product.productTypeId">
-          <option *ngFor="let producttype of this.productsTypes" [value]="producttype.id" > {{producttype.description}} </option>
+        <label>Category</label>
+        <select  class="form-control" [(ngModel)]="country.id">
+          <option *ngFor="let producttype of this.categories" [value]="producttype.id" > {{producttype.description}} </option>
         </select>
-        <label for="imagen">Imagen</label>
-        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+
     </div>
     <div class="app-modal-footer">
       <button type="button" class="btn btn-default" (click)="modal1.hide()">Cerrar</button>
       <button type="button" class="btn btn-primary" (click)="SaveChanges(); modal1.hide();">Guardar Cambios</button>
+    </div>
+  </app-modal>
+
+   <app-modal #modal2 class="ij_modal">
+    <div class="app-modal-header">
+      Add new Team
+    </div>
+    <div class="app-modal-body">
+      Are you sure wants delete record?
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal2.hide()">No</button>
+      <button type="button" class="btn btn-primary" (click)="DeleteCountry(); modal2.hide();">Yes</button>
     </div>
   </app-modal>

@@ -56,13 +56,10 @@ export class ProductService {
     const headers = new HttpHeaders().set('content-type', 'application/json');
     return this.http.post<boolean>(Url, body, { headers });
   }
-
   public DeleteProduct(id: string): Observable<boolean> {
     const Url: string = environment.baseUrl + 'products/DeleteProduct';
 
     return this.http.delete<boolean>(Url, { params: {id: id } });
   }
-
-
 
 }

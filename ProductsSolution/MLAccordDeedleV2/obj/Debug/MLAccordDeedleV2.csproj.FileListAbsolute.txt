@@ -66,4 +66,4 @@ C:\devel\tesis_ignacio_joakin\ProductsSolution\MLAccordDeedleV2\bin\Debug\tr\Zed
 C:\devel\tesis_ignacio_joakin\ProductsSolution\MLAccordDeedleV2\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\devel\tesis_ignacio_joakin\ProductsSolution\MLAccordDeedleV2\bin\Debug\zh-tw\ZedGraph.resources.dll
 C:\devel\tesis_ignacio_joakin\ProductsSolution\MLAccordDeedleV2\obj\Debug\MLAccordDeedleV2.csproj.CopyComplete
-C:\devel\tesis_ignacio_joakin\ProductsSolution\MLAccordDeedleV2\obj\Debug\MLAccordDeedleV2.csprojAssemblyReference.cache
+C:\devel\tesis_ignacio_joakin\ProductsSolution\MLAccordDeedleV2\bin\Debug\Accord.dll.config

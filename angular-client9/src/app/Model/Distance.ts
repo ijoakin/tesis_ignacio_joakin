@@ -7,6 +7,10 @@ export class Distance {
   countryOrigen: string;
   countryDestino: string;
   distanceKm: number;
+  productid: number;
+  productdescription: string;
+  amount: number;
+  amountToMove: number;
 
 
   constructor(  id: number,
@@ -16,7 +20,10 @@ export class Distance {
         salePointDestino: string,
         countryOrigen: string,
         countryDestino: string,
-        distanceKm: number) {
+        distanceKm: number,
+        productid: number,
+        productdescription: string,
+        amount: number) {
           this.id = id;
           this.salePoint_origenId = salePoint_origenId;
           this.salePointOrigen = salePointOrigen;
@@ -25,8 +32,11 @@ export class Distance {
           this.countryOrigen = countryOrigen;
           this.countryDestino = countryDestino;
           this.distanceKm = distanceKm;
+          this.productid = productid;
+          this.productdescription = productdescription;
+          this.amount = amount;
+          this.amountToMove = 0;
         }
-
 }
 
 

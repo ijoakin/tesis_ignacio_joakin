@@ -8,6 +8,10 @@ import { SalePoint } from "src/app/Model/SalePoint";
 import { SalePointService } from "src/app/Services/salepoint.service";
 import { CountryService } from "src/app/Services/country.service";
 import { Country } from "src/app/Model/Country";
+import { StockService } from "src/app/Services/stock.service";
+import { Stock } from "src/app/Model/Stock";
+import { PredictionService } from "src/app/Services/prediction.service";
+import { Prediction } from "src/app/Model/Prediction";
 
 @Component({
   templateUrl:'./distance.component.html',
@@ -22,6 +26,9 @@ export class DistanceComponent implements OnInit {
   public salePoint: SalePoint;
   public country: Country;
   public countries: Country[];
+  public ShowStock: boolean;
+  public stock: Stock;
+  public prediction: Prediction;
 
   filmIcon = faFilm;
   eyeIcon = faEye;
@@ -29,17 +36,21 @@ export class DistanceComponent implements OnInit {
   truck = faTruck;
 
   constructor(@Inject(DistanceService) private distanceService: DistanceService,
-  @Inject(ProductService) private productService: ProductService,
-  @Inject(SalePointService) private salePointService: SalePointService,
-  @Inject(CountryService) private countryService: CountryService) {
+    @Inject(ProductService) private productService: ProductService,
+    @Inject(SalePointService) private salePointService: SalePointService,
+    @Inject(CountryService) private countryService: CountryService,
+    @Inject(StockService) private stockService: StockService,
+    @Inject(PredictionService) private predictionService: PredictionService
+    ) {
 
   }
 
   ngOnInit() {
     this.getAllSalePoints();
-    this.getAllDistances();
+    //this.getAllDistances();
     this.getAllProduct();
     this.getAllCoutries();
+    this.ShowStock = false;
 
     this.country = {
       id: 0,
@@ -64,6 +75,27 @@ export class DistanceComponent implements OnInit {
       productTypeDescription: '',
       productTypeId: 0
     }
+    this.stock = {
+      amount: 0,
+      id: 0,
+      productDescription: '',
+      productId: 0,
+      salePointDescription: '',
+      salePointId: 0
+    }
+    this.prediction = {
+      id:0,
+      amount: 0,
+      applied: false,
+      day: 0,
+      productid: 0,
+      salepointid: 0,
+      date: undefined,
+      month: 0,
+      product: '',
+      salepoint: '',
+      year: 0
+    }
   }
   public getAllDistances() {
     this.distanceService.getAllDistances()
@@ -79,8 +111,17 @@ export class DistanceComponent implements OnInit {
   }
 
   applyProductMoved( id: number) {
+    let dist = this.distances[id - 1];
+
+    this.predictionService.applyByProductIdCountryId(String(this.product.id),
+    String(dist.salePoint_origenId), String(dist.salePoint_destinoId), String(dist.amountToMove))
+    .subscribe((data: boolean) => {
+      alert (data)
+      this.Filtrar();
+    });
 
   }
+
   public getAllCoutries() {
     this.countryService.getAllCountries()
       .subscribe((data: Country[]) => this.countries = data);
@@ -93,5 +134,48 @@ export class DistanceComponent implements OnInit {
     //this.description = 'Ignacio Joakin';
     //console.log(this.description);
   }
+  public Filtrar() {
+    //alert(this.country.id);
+    var prd: Product;
+    var stk: Stock;
+    if (this.product.id > 0 && this.country.id >= 0) {
+      this.ShowStock = true;
+
+      this.stockService.GetStockBySalePointProduct(String(this.product.id), String(this.country.id))
+        .subscribe((data: Stock) => {
+          this.stock = data;
+        });
+      this.predictionService.getPredictionByProductIdCountryId(String(this.product.id), String(this.country.id))
+          .subscribe((data: Prediction) => {
+          this.prediction = data;
+        });
+
+      this.distanceService.getAllDistancesByIdProductIdCountry(String(this.product.id), String(this.country.id))
+          .subscribe((data: Distance[]) => {
+          this.distances = data;
+        });
+    }
+  }
+  public MoveProduct(countryOrigenId: number, cantidad: number) {
+
+  }
+  public getProductDescription() {
+    var prd: Product;
+    /*this.productService.GetProductById(String(this.product.id))
+        .subscribe((data: Product) => prd = data);
+
+        if (prd != undefined){
+          return prd.description;
+        }
+    return '';
+    */
+    var idn: number = this.product.id - 1;
+
+    if (idn > 0){
+      return this.products[idn].description;
+    }
+    return '';
+  }
+
 
 }

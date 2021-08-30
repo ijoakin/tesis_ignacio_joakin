@@ -22,4 +22,20 @@ export class PredictionService {
     return this.http.get<Boolean>(Url);
   }
 
+
+  public getPredictionByProductIdCountryId(productid: string, countryid: string): Observable<Prediction> {
+    const Url: string = environment.baseUrl + 'Predictions/getAllPredictionsByProductIdCountryId';
+
+    return this.http.get<Prediction>(Url, { params : {productid: productid, countryid: countryid } });
+
+  }
+
+  public applyByProductIdCountryId(productid: string, countryorigenid: string, countryDestinoid: string, amount: string): Observable<boolean> {
+    const Url: string = environment.baseUrl + 'Predictions/applyByProductIdCountryId';
+
+    return this.http.get<boolean>(Url, { params : {productid: productid, countryorigenid: countryorigenid, countryDestinoid: countryDestinoid, amount:amount } });
+
+  }
+
+
 }

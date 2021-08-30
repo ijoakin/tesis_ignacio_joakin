@@ -28,6 +28,7 @@ namespace DIManagement
             services.AddTransient<IRepository<Country>, Repository<Country>>();
             services.AddTransient<IRepository<Prediction>, Repository<Prediction>>();
             services.AddTransient<IRepository<Distance>, Repository<Distance>>();
+            services.AddTransient<IRepository<Category>, Repository<Category>>();
 
             services.AddTransient<IDBTools, DataAccess.DBTools>();
         }

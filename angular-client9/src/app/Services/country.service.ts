@@ -6,7 +6,6 @@ import { Country } from '../Model/Country';
 
 @Injectable()
 export class CountryService {
-
   constructor(private http: HttpClient) {
 
   }
@@ -16,4 +15,16 @@ export class CountryService {
 
     return this.http.get<Country[]>(Url);
   }
+  public DeleteCountry(id: string): Observable<boolean> {
+      const Url: string = environment.baseUrl + 'country/DeleteCountry';
+
+    return this.http.delete<boolean>(Url, { params: {id: id } });
+  }
+
+   public GetCountryById(id: string): Observable<Country> {
+    const Url: string = environment.baseUrl + 'country/GetCountryById';
+    return this.http.get<Country>(Url, { params : {id: id} });
+  }
+
+
 }

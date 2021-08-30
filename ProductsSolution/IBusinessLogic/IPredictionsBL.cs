@@ -1,7 +1,5 @@
 ﻿using DTO;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IBusinessLogic
@@ -9,7 +7,10 @@ namespace IBusinessLogic
     public interface IPredictionsBL
     {
         Task<IList<PredictionDTO>> GetAllPredictions();
-             
+        Task<IList<PredictionDTO>> GetPredictionsByProductId(int productId, int countryId);
+
+        Task<bool> applyByProductIdCountryId(int productid, int countryorigenid, int countryDestinoid, int amount);
+
         PredictionDTO GetPredictionById(int Id);
         
         bool Save(PredictionDTO prediction);

@@ -2,22 +2,23 @@
 <div class="table-responsive">
   <div class="col-sm-4">
     <label>País Destino</label>
-    <select  class="form-control" [(ngModel)]="country.id">
+    <select  class="form-control" [(ngModel)]="country.id" >
       <option *ngFor="let c of this.countries" [value]="c.id" > {{c.description}} </option>
     </select>
     <label>Producto a mover</label>
-    <select  class="form-control" [(ngModel)]="product.id">
-
+    <select  class="form-control" [(ngModel)]="product.id" >
       <option *ngFor="let p of this.products" [value]="p.id" > {{p.description}} </option>
     </select>
-    <button class="btn btn-primary">Filtrar</button>
+    <button class="btn btn-primary" (click)="this.Filtrar()">Filtrar</button>
   </div>
+  <div [style.display]="ShowStock ? 'block' : 'none'">
   <div class="col-sm-12">
-    <label>La predicción para los proximos 7 días para el producto: <b>Iron Wire</b> es <b>18</b></label>
+    <label>La predicción para los proximos 7 días para el producto: <b>{{this.getProductDescription()}}</b> es <b>{{this.prediction.amount}}</b></label>
   </div>
 
   <div class="col-sm-12">
-    <label>Cantidad de Stock actual en Argentina: <b>3</b></label>
+    <label>Cantidad de Stock actual en {{countries[country.id].description}}: <b>{{this.stock.amount}}</b></label>
+  </div>
   </div>
   <table class="table">
   <thead>
@@ -35,8 +36,8 @@
       <td>{{ distance.countryOrigen }}</td>
       <td>{{ distance.countryDestino }}</td>
       <td>{{ distance.distanceKm }}</td>
-      <td>{{ 10 }}</td>
-      <td><input type="text" /> </td>
+      <td>{{ distance.amount }}</td>
+      <td><input type="text" [(ngModel)]="distance.amountToMove"/> </td>
       <td style="align-content: center;">
         <i class="fa fa-truck" data-toggle="modal" data-target="#myModal" alt="Realizar Movimiento"></i>
          <fa-icon [icon]="truck" (click)="this.applyProductMoved(distance.id)" data-toggle="modal" data-target="#myModal"></fa-icon>

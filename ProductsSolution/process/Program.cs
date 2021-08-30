@@ -81,8 +81,9 @@ namespace process
             var repositoryProducts = new Repository<Product>(productsDBContext);
             var repositorySalePoint = new Repository<SalePoint>(productsDBContext);
             var repositoryStock = new Repository<Stock>(productsDBContext);
+            var repositoryCountry = new Repository<Country>(productsDBContext);
 
-            PredictionsBL predictionsBL = new PredictionsBL(repositoryPrediction, repositoryProducts, repositorySalePoint, repositoryStock);
+            PredictionsBL predictionsBL = new PredictionsBL(repositoryPrediction, repositoryProducts, repositorySalePoint, repositoryStock, repositoryCountry);
             Console.WriteLine($"Applying predictions 7 días - {DateTime.Now}");
             predictionsBL.ApplyAllPredictionsNoAsync();
 
