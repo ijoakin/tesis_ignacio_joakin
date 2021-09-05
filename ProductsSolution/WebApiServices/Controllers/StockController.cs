@@ -68,13 +68,10 @@ namespace WebApiServices.Controllers
             return this.stockBL.Save(stockDTO);
         }
 
-
-        [HttpDelete("deleteSalePoint")]
-        public bool deleteSalePoint(int id)
+        [HttpDelete("deleteStock")]
+        public bool deleteStock(int id)
         {
             return this.stockBL.Delete(id);
         }
-
-        
     }
 }
