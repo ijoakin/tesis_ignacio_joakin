@@ -112,8 +112,6 @@ export class PortalComponent implements OnInit {
     }
   }
   public comprar() {
-
-    debugger;
     if (this.stock.amount > 0){
         this.search = {
           ProductId: this.product.id,
