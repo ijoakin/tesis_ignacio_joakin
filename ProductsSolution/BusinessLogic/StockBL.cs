@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Immutable;
+using AutoMapper;
 
 namespace BusinessLogic
 {
@@ -44,6 +45,17 @@ namespace BusinessLogic
                              SalePointId = s.SalePointId
                          };
             return query.ToList();
+        }
+        public bool Save(StockDTO stockDTO)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<StockDTO, Stock>();
+            });
+            IMapper iMapper = config.CreateMapper();
+
+            var stock = iMapper.Map<StockDTO, Stock>(stockDTO);
+
+            return this.repositoryStock.Save(stock);
         }
     }
 }

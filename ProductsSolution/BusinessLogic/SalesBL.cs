@@ -115,6 +115,21 @@ namespace BusinessLogic
            return salesDtoList;
         }
 
+        public async Task<bool> SaveAsync(SaleDTO saleDto)
+        {
+            var sale = new Sale();
+
+            if (saleDto.Id != 0) sale = this.saleRepository.GetById(saleDto.Id);
+
+            sale.Id = saleDto.Id;
+            sale.Amount = saleDto.Amount;
+            sale.Date = saleDto.Date;
+            sale.ProductId = saleDto.ProductId;
+            sale.SalePointId = saleDto.SalePointId;
+
+            return this.saleRepository.Save(sale);
+        }
+
         public bool Save(SaleDTO saleDto)
         {
             var sale = new Sale();

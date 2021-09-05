@@ -12,7 +12,7 @@ namespace IBusinessLogic
         bool Save(SaleDTO saleDto);
         bool Delete(int id);
         SaleDTO GetById(int id);
-
+        Task<bool> SaveAsync(SaleDTO saleDto);
         Task<IList<SalePointDTO>> GetSalesPoints();
 
         PageServerSideDTO<SaleDTO> GetAllSalesPaginate(int page);

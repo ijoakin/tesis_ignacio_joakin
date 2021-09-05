@@ -15,7 +15,7 @@ namespace WebApiShopping.Controllers
 {
     [Route("/api/[controller]")]
     [ApiController]
-    public class ProductsController: ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductsBL productsBL;
         private ICachingMemoryHelper memoryCache;
@@ -55,8 +55,8 @@ namespace WebApiShopping.Controllers
         }
 
         [HttpGet("GetProducts")]
-        [ProducesResponseType(typeof(List<ProductDTO>), (int) HttpStatusCode.OK)]
-        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(List<ProductDTO>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<IList<ProductDTO>>> GetProducts()
         {
             try
@@ -80,9 +80,9 @@ namespace WebApiShopping.Controllers
         }
 
         [HttpGet("getProductById")]
-        [ProducesResponseType(typeof(ProductDTO), (int) HttpStatusCode.OK)]
-        [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ProductDTO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<ProductDTO>> GetProductById(int id)
         {
             var productDto = await productsBL.GetProductByIdAsync(id);
@@ -97,7 +97,7 @@ namespace WebApiShopping.Controllers
         {
             if (memoryCache.GetValue("ProductTypes") != null)
             {
-                return (List<ProductTypeDTO>) memoryCache.GetValue( "ProductTypes");
+                return (List<ProductTypeDTO>)memoryCache.GetValue("ProductTypes");
             }
 
             //adding list to the cache

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PortalComponent } from 'src/app/Components/Seller/portal.component';
+import { PortalComponent } from 'src/app/Components/Portal/portal.component';
 import { ProductService } from 'src/app/Services/product.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CountryService } from 'src/app/Services/country.service';

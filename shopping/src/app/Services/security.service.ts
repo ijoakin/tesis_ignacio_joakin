@@ -16,7 +16,6 @@ export class SecurityService {
     return this.http.get<User[]>(Url);
   }
   login(credentials: any) {
-    debugger;
     return this.http.post(environment.baseUrl + '/auth/login',
     credentials, {
       headers: new HttpHeaders({

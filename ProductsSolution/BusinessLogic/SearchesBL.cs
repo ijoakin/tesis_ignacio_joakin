@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using AutoMapper;
+using DTO;
 using Entities;
 using IBusinessLogic;
 using IRepositories;
@@ -21,6 +22,22 @@ namespace BusinessLogic
             this.repositorySearches = _repositorySearches;
             this.repositoryProduct = _repositoryProduct;
             this.repositorySalePoint = _repositorySalePoint;
+        }
+
+        public bool SaveSearch(SearchDTO searchDTO) {
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<SearchDTO, Search>();
+            });
+            IMapper iMapper = config.CreateMapper();
+
+            var search = iMapper.Map<SearchDTO, Search>(searchDTO);
+
+            search.year = DateTime.Today.Year;
+            search.month = DateTime.Today.Month;
+            search.Date = DateTime.Today;
+            search.UserId = 1;
+            return this.repositorySearches.Save(search);
         }
 
         public async Task<IList<SearchDTO>> GetAllSearches()

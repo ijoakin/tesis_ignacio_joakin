@@ -10,11 +10,13 @@ namespace DTO
         public string searchtext { get; set; }
         public bool success { get; set; }
         public int ProductId { get; set; }
-        public int userid { get; set; }
+        public int userid { get; set; } 
         public string productDescription { get; set; }
         public string SalePointDescription { get; set; }
         public int amount { get; set; }
         public int month { get; set; }
         public int year { get; set; }
+
+        public int salepointid { get; set; }
     }
 }

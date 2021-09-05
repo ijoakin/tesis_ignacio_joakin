@@ -4,7 +4,7 @@ using DTO;
 using IBusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ProductsController.Controllers
+namespace WebApiServices.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

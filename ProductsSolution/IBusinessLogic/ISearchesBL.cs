@@ -9,5 +9,6 @@ namespace IBusinessLogic
     public interface ISearchesBL
     {
         Task<IList<SearchDTO>> GetAllSearches();
+        bool SaveSearch(SearchDTO searchDTO);
     }
 }

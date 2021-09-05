@@ -15,8 +15,6 @@ export class DbtoolsService {
   }
 
   public SimulateSales(amount: string, month: string, year: string): Observable<boolean> {
-    // tslint:disable-next-line: no-debugger
-    debugger;
     const Url: string = environment.baseUrl + 'DBTools/SimulateSales';
     return this.http.get<boolean>(Url, {params: {count: amount, month, year }});
   }

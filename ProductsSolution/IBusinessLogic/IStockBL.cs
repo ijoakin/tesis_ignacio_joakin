@@ -9,5 +9,6 @@ namespace IBusinessLogic
     public interface IStockBL
     {
         Task<IList<StockDTO>> GetAllStock();
+        bool Save(StockDTO stockDTO);
     }
 }

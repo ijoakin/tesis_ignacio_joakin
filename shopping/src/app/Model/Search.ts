@@ -5,9 +5,10 @@ export class Search {
   amount: number;
   ProductId: number;
   productDescription: string;
-  SalePointDescription: string;
-  public month: string;
-  public year: string;
+  salePointDescription: string;
+  salePointId: number;
+  month: number;
+  year: number;
 
   constructor(id: number,
     searchtext: string,
@@ -16,8 +17,9 @@ export class Search {
     ProductId: number,
     productDescription: string,
     SalePointDescription: string,
-    month: string,
-    year: string
+    month: number,
+    year: number,
+    salePointId: number
   ) {
     this.id = id;
     this.searchtext = searchtext;
@@ -25,8 +27,9 @@ export class Search {
     this.amount = amount;
     this.ProductId = ProductId;
     this.productDescription = productDescription;
-    this.SalePointDescription = SalePointDescription;
+    this.salePointDescription = SalePointDescription;
     this.month = month;
     this.year = year;
+    this.salePointId = salePointId;
   }
 }
