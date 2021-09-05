@@ -1,5 +1,5 @@
-<h3>Sales     <button (click)="this.getAllSales()" class="btn btn-primary" style="margin-right: 10px" >Get Sales</button>
-    <button type="button" class="btn btn-primary" (click)="this.NewSale()">Add new Sale</button>
+<h3>Ventas
+    <button (click)="this.getAllSales()" class="btn btn-primary" style="margin-right: 10px" >Obtener Ventas</button>
 </h3>
 <div class="table-responsive">
   <table class="table">
@@ -22,10 +22,9 @@
         <td>{{sale.date}}</td>
         <td>{{sale.month}}</td>
         <td>{{sale.year}}</td>
-        <td>
-          <i class="fa fa-eye" (click)="this.EditSale(sale.id)" data-toggle="modal" data-target="#myModal"></i>
-          <i class="fa fa-times" (click)="this.ShowDeleteConfirm(sale.id)" aria-hidden="true"></i>
-         </td>
+         <td>
+            <fa-icon [icon]="timeIcon" (click)="this.ShowDeleteConfirm(sale.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+          </td>
       </tr>
   </tbody>
   </table>

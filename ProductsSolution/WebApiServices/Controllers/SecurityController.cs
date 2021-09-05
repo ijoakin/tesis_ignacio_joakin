@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DTO;
 using IBusinessLogic;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace WebApiServices.Controllers
 
         public SecurityController(ISecurityBL _securityBL)
         {
-            this.securityBL = _securityBL;
+            this.securityBL = _securityBL ?? throw new ArgumentNullException(nameof(_securityBL));
         }
 
         [HttpGet("GetAllUsers")]

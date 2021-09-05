@@ -10,5 +10,6 @@ namespace IBusinessLogic
     {
         Task<IList<StockDTO>> GetAllStock();
         bool Save(StockDTO stockDTO);
+        bool Delete(int Id);
     }
 }

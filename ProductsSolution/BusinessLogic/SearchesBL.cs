@@ -6,8 +6,6 @@ using IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic
@@ -19,9 +17,9 @@ namespace BusinessLogic
         IRepository<SalePoint> repositorySalePoint; 
         public SearchesBL(IRepository<Search> _repositorySearches, IRepository<Product> _repositoryProduct, IRepository<SalePoint> _repositorySalePoint)
         {
-            this.repositorySearches = _repositorySearches;
-            this.repositoryProduct = _repositoryProduct;
-            this.repositorySalePoint = _repositorySalePoint;
+            this.repositorySearches = _repositorySearches ?? throw new ArgumentNullException(nameof(_repositorySearches));
+            this.repositoryProduct = _repositoryProduct ?? throw new ArgumentNullException(nameof(_repositoryProduct));
+            this.repositorySalePoint = _repositorySalePoint ?? throw new ArgumentNullException(nameof(_repositorySalePoint));
         }
 
         public bool SaveSearch(SearchDTO searchDTO) {
@@ -33,8 +31,6 @@ namespace BusinessLogic
 
             var search = iMapper.Map<SearchDTO, Search>(searchDTO);
 
-            search.year = DateTime.Today.Year;
-            search.month = DateTime.Today.Month;
             search.Date = DateTime.Today;
             search.UserId = 1;
             return this.repositorySearches.Save(search);

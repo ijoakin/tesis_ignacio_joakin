@@ -14,13 +14,12 @@ namespace WebApiShopping.Controllers
     public class StockController : ControllerBase
     {
         private IStockBL stockBL;
-        private ICountryBL countryBL;
+        
         private readonly ISalesBL _salesBl;
-        public StockController(IStockBL _stockBL, ICountryBL _countryBL, ISalesBL salesBl)
+        public StockController(IStockBL _stockBL, ISalesBL salesBl)
         {
-            this.stockBL = _stockBL;
-            this.countryBL = _countryBL ?? throw new ArgumentNullException(nameof(_countryBL));
-            _salesBl = salesBl;
+            stockBL = _stockBL ?? throw new ArgumentNullException(nameof(_stockBL));
+            _salesBl = salesBl ?? throw new ArgumentNullException(nameof(salesBl));
 
         }
         [HttpGet("GetStockDTOs")]

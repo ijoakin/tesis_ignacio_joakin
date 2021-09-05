@@ -1,6 +1,7 @@
 ﻿using DTO;
 using IBusinessLogic;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace WebApiServices.Controllers
         public ISearchesBL searchesBL;
         public SearchesController(ISearchesBL _searchesBL)
         {
-            this.searchesBL = _searchesBL;
+            this.searchesBL = _searchesBL ?? throw new ArgumentNullException(nameof(_searchesBL));
         }
 
         [HttpGet("GetAllSearches")]

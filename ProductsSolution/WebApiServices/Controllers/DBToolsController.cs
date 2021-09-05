@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DTO;
 using IBusinessLogic;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApiServices.Controllers
@@ -18,8 +16,8 @@ namespace WebApiServices.Controllers
         private IHostingEnvironment _env;
         public DBToolsController(IDBToolsBL iDBTools, IHostingEnvironment env)
         {
-            _iDBTools = iDBTools;
-            _env = env;
+            _iDBTools = iDBTools ?? throw new ArgumentNullException(nameof(iDBTools));
+            _env = env ?? throw new ArgumentNullException(nameof(env));
         }
 
         [HttpGet("SimulateNextMonth")]

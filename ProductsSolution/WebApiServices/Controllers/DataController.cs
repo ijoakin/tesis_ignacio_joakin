@@ -13,8 +13,8 @@ namespace WebApiServices.Controllers
         private IHostingEnvironment _env;
         public DataController(IDBToolsBL iDBTools, IHostingEnvironment env)
         {
-            _iDBTools = iDBTools;
-            _env = env;
+            _iDBTools = iDBTools ?? throw new ArgumentNullException(nameof(iDBTools));
+            _env = env ?? throw new ArgumentNullException(nameof(env));
         }
         [HttpGet("createinitialdata")]
         public bool createinitialdata()

@@ -6,6 +6,7 @@ using Entities;
 using IRepositories;
 using DTO;
 using IBusinessLogic;
+using System;
 
 namespace BusinessLogic
 {
@@ -23,11 +24,11 @@ namespace BusinessLogic
                                 IRepository<SalePoint> salePointTypeRepository,
                                 IRepository<Country> _countryRepository)
         {
-            this.saleRepository = saleRepository;
-            this.productRepository = productRepository;
-            this.ProductTypeRepository = ProductTypeRepository;
-            this.salePointRepository = salePointTypeRepository;
-            this.countryRepository = _countryRepository;
+            this.saleRepository = saleRepository ?? throw new ArgumentNullException(nameof(saleRepository));
+            this.productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+            this.ProductTypeRepository = ProductTypeRepository ?? throw new ArgumentNullException(nameof(ProductTypeRepository));
+            this.salePointRepository = salePointTypeRepository ?? throw new ArgumentNullException(nameof(salePointTypeRepository)); 
+            this.countryRepository = _countryRepository ?? throw new ArgumentNullException(nameof(_countryRepository));
         }
 
         public PageServerSideDTO<SaleDTO> GetAllSalesPaginate(int page)
@@ -141,6 +142,9 @@ namespace BusinessLogic
             sale.Date = saleDto.Date;
             sale.ProductId = saleDto.ProductId;
             sale.SalePointId = saleDto.SalePointId;
+            sale.UserId = 1;
+            sale.month = saleDto.month;
+            sale.year = saleDto.year;
 
             return this.saleRepository.Save(sale);
         }

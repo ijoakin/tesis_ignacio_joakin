@@ -4,10 +4,8 @@ using IBusinessLogic;
 using IRepositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Collections.Immutable;
 using AutoMapper;
 
 namespace BusinessLogic
@@ -22,10 +20,16 @@ namespace BusinessLogic
             IRepository<Product> _productRepository,
             IRepository<SalePoint> _salePointRepository)
         {
-            this.repositoryStock = _repositoryStock;
-            this.productRepository = _productRepository;
-            this.salePointRepository = _salePointRepository;
+            this.repositoryStock = _repositoryStock ?? throw new ArgumentNullException(nameof(_repositoryStock));
+            this.productRepository = _productRepository ?? throw new ArgumentNullException(nameof(_productRepository));
+            this.salePointRepository = _salePointRepository ?? throw new ArgumentNullException(nameof(_salePointRepository));
         }
+
+        public bool Delete(int Id)
+        {
+            return this.repositoryStock.Delete(Id);
+        }
+
         public async Task<IList<StockDTO>> GetAllStock()
         {
             var returnvalue = new List<StockDTO>();

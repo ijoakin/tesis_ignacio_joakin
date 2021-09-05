@@ -36,6 +36,8 @@ namespace WebApiShopping.Controllers
         [HttpPost("SaveIntencionCompra")]
         public async Task<bool> SaveIntencionCompra(SearchDTO searchDTO)
         {
+            searchDTO.year = DateTime.Today.Year;
+            searchDTO.month = DateTime.Today.Month;
             var listSearchDTO = this.searchesBL.SaveSearch(searchDTO);
 
             if (searchDTO.success)
@@ -49,6 +51,18 @@ namespace WebApiShopping.Controllers
                     stockDto.Amount -= 1;
                     listSearchDTO = stockBL.Save(stockDto);
                 }
+
+                var saleDto = new SaleDTO()
+                {
+                    month = searchDTO.month,
+                    Amount = searchDTO.amount,
+                    Date = DateTime.Now,
+                    ProductId = searchDTO.ProductId,
+                    SalePointId = searchDTO.salepointid,
+                    year = searchDTO.year
+                };
+
+                this._salesBl.Save(saleDto);
             }
 
             return listSearchDTO;

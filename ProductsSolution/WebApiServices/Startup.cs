@@ -61,7 +61,7 @@ namespace WebApiServices
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Products API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Management API", Version = "v1" });
             });
         }
 

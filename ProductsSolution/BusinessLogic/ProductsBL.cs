@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using Entities;
@@ -24,11 +23,11 @@ namespace BusinessLogic
             IRepository<Country> _repositoryCountry,
             IRepository<SalePoint> _repositorySalePoint)
         {
-            repositoryProduct = _repository;
-            repositoryProductType = _repositoryProductType;
-            repositoryStock = _repositoryStock;
-            repositoryCountry = _repositoryCountry;
-            repositorySalePoint = _repositorySalePoint;
+            repositoryProduct = _repository ?? throw new ArgumentNullException(nameof(_repository));
+            repositoryProductType = _repositoryProductType ?? throw new ArgumentNullException(nameof(_repositoryProductType));
+            repositoryStock = _repositoryStock ?? throw new ArgumentNullException(nameof(_repositoryStock));
+            repositoryCountry = _repositoryCountry ?? throw new ArgumentNullException(nameof(_repositoryCountry));
+            repositorySalePoint = _repositorySalePoint ?? throw new ArgumentNullException(nameof(_repositorySalePoint));
         }
 
         public async Task<IList<ProductDTO>> GetAllProducts()

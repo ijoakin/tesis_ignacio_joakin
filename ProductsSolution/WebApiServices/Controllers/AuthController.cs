@@ -19,8 +19,8 @@ namespace WebApiServices.Controllers
         private readonly ISecurityBL securityBL;
         public AuthController(IConfiguration configuration, ISecurityBL securityBL)
         {
-            this.configuration = configuration;
-            this.securityBL = securityBL;
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            this.securityBL = securityBL ?? throw new ArgumentNullException(nameof(securityBL));
         }
 
         [HttpPost, Route("login")]

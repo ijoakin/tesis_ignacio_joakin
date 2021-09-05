@@ -10,6 +10,7 @@ import { Sale } from 'src/app/Model/Sale';
 
 import { Observable } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
+import { faEye, faFilm, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sales',
@@ -26,6 +27,11 @@ export class SalesComponent implements OnInit {
   public p = 1;
   public loading: boolean;
   public total = 10;
+
+  filmIcon = faFilm;
+  eyeIcon = faEye;
+  timeIcon = faTimes;
+
 
   constructor(@Inject(SaleService) private saleService: SaleService,
               @Inject(ProductService) private productService: ProductService,

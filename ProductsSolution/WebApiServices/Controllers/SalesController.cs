@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using DTO;
@@ -15,7 +16,7 @@ namespace WebApiServices.Controllers
 
         public SalesController(ISalesBL salesBl)
         {
-            _salesBl = salesBl;
+            _salesBl = salesBl ?? throw new ArgumentNullException(nameof(salesBl));
         }
 
         [HttpGet("GetSales")]

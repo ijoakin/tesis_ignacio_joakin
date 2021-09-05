@@ -24,10 +24,10 @@ namespace BusinessLogic
             IRepository<Country> _repositoryCountry)
         {
             this.repositoryPredictions = _repositoryPredictions ?? throw new ArgumentNullException(nameof(_repositoryPredictions));
-            this.repositoryProduct = _repositoryProduct;
-            this.repositorySalePoint = _repositorySalePoint;
-            this.repositoryStock = _repositoryStock;
-            this.repositoryCountry = _repositoryCountry;
+            this.repositoryProduct = _repositoryProduct ?? throw new ArgumentNullException(nameof(_repositoryProduct));
+            this.repositorySalePoint = _repositorySalePoint ?? throw new ArgumentNullException(nameof(_repositorySalePoint));
+            this.repositoryStock = _repositoryStock ?? throw new ArgumentNullException(nameof(_repositoryStock));
+            this.repositoryCountry = _repositoryCountry ?? throw new ArgumentNullException(nameof(_repositoryCountry));
         }
 
         public bool DeletePrediction(int id)

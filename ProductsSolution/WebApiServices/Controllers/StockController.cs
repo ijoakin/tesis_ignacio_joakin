@@ -18,9 +18,9 @@ namespace WebApiServices.Controllers
         private readonly ISalesBL _salesBl;
         public StockController(IStockBL _stockBL, ICountryBL _countryBL, ISalesBL salesBl)
         {
-            this.stockBL = _stockBL;
+            this.stockBL = _stockBL ?? throw new ArgumentNullException(nameof(_stockBL));
             this.countryBL = _countryBL ?? throw new ArgumentNullException(nameof(_countryBL));
-            _salesBl = salesBl;
+            _salesBl = salesBl ?? throw new ArgumentNullException(nameof(salesBl));
 
         }
         [HttpGet("GetStockDTOs")]
@@ -46,5 +46,35 @@ namespace WebApiServices.Controllers
 
             return NotFound();
         }
+
+        [HttpGet("GetById")]
+        [ProducesResponseType(typeof(StockDTO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<ActionResult<StockDTO>> GetById(int id)
+        {
+            var stocks = await stockBL.GetAllStock();
+
+            var stockDto = stocks.Where(x => x.Id == id).FirstOrDefault();
+
+            if (stockDto != null)
+                return Ok(stockDto);
+
+            return NotFound();
+        }
+
+        [HttpPost("SaveStock")]
+        public bool SaveStock(StockDTO stockDTO)
+        {
+            return this.stockBL.Save(stockDTO);
+        }
+
+
+        [HttpDelete("deleteSalePoint")]
+        public bool deleteSalePoint(int id)
+        {
+            return this.stockBL.Delete(id);
+        }
+
+        
     }
 }

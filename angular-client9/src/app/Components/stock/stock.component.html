@@ -9,21 +9,60 @@
     <th>salePointId</th>
     <th>salePointDescription</th>
     <th>amount</th>
+    <th>Commands</th>
   </thead>
   <tbody>
-    <tr *ngFor="let search of this.stocks | paginate: { itemsPerPage: 10, currentPage: p }">
-      <td>{{search.id}}</td>
-      <td>{{search.productId}}</td>
-      <td>{{search.productDescription}}</td>
-      <td>{{search.salePointId}}</td>
-      <td>{{search.salePointDescription}}</td>
-      <td>{{search.amount}}</td>
-    <td>
-        <i class="fa fa-eye" data-toggle="modal" data-target="#myModal"></i>
-        <i class="fa fa-times" aria-hidden="true"></i>
+    <tr *ngFor="let stock of this.stocks | paginate: { itemsPerPage: 10, currentPage: p }">
+      <td>{{stock.id}}</td>
+      <td>{{stock.productId}}</td>
+      <td>{{stock.productDescription}}</td>
+      <td>{{stock.salePointId}}</td>
+      <td>{{stock.salePointDescription}}</td>
+      <td>{{stock.amount}}</td>
+      <td>
+          <fa-icon [icon]="eyeIcon" (click)="this.EditStock(stock.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+          <fa-icon [icon]="timeIcon" (click)="this.ShowDeleteConfirm(stock.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
         </td>
     </tr>
   </tbody>
 </table>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
+
+
+ <app-modal #modal1 class="ij_modal">
+    <div class="app-modal-header">
+      Crear o editar un producto
+    </div>
+    <div class="app-modal-body">
+        <label>Producto</label>
+        <select  class="form-control" [(ngModel)]="stock.productId">
+          <option *ngFor="let product of this.products" [value]="product.id" > {{product.description}} </option>
+        </select>
+
+        <label>Punto de Venta</label>
+        <select  class="form-control" [(ngModel)]="stock.salePointId">
+          <option *ngFor="let salePoint of this.salePoints" [value]="salePoint.id" > {{salePoint.description}} </option>
+        </select>
+
+        <label for="description">Cantidad</label>
+        <input type="text"  class="form-control" [(ngModel)]= "stock.amount"/>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal1.hide()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="SaveChanges(); modal1.hide();">Guardar Cambios</button>
+    </div>
+  </app-modal>
+
+  <app-modal #modal2 class="ij_modal">
+    <div class="app-modal-header">
+      Eliminar:
+    </div>
+    <div class="app-modal-body">
+      Realmente desea eliminar el registro?
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal2.hide()">No</button>
+      <button type="button" class="btn btn-primary" (click)="DeleteStock(); modal2.hide();">Yes</button>
+    </div>
+  </app-modal>

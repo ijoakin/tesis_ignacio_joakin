@@ -22,8 +22,8 @@ namespace WebApiShopping.Controllers
 
         public ProductsController(IProductsBL _productsBL, ICachingMemoryHelper _memoryCache)
         {
-            productsBL = _productsBL;
-            this.memoryCache = _memoryCache;
+            productsBL = _productsBL ?? throw new ArgumentNullException(nameof(_productsBL));
+            this.memoryCache = _memoryCache ?? throw new ArgumentNullException(nameof(_memoryCache));
         }
 
         [HttpGet("GetProducts")]

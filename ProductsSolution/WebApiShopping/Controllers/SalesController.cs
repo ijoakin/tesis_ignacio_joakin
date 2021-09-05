@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DTO;
 using IBusinessLogic;
@@ -14,7 +15,7 @@ namespace WebApiServices.Controllers
 
         public SalesController(ISalesBL salesBl)
         {
-            _salesBl = salesBl;
+            _salesBl = salesBl ?? throw new ArgumentNullException(nameof(salesBl));
         }
 
         [HttpPost("SaveSale")]
