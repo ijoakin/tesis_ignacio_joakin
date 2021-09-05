@@ -1,4 +1,7 @@
-<h2>Sales Points</h2>
+<h2>Sales Points
+  <button (click)="this.getAllSalePoints()" class="btn btn-primary" style="margin-right: 10px" >Obtener SalePoints</button>
+      <button type="button" class="btn btn-primary" (click)="this.NewSalePoint()">Agregar Nuevo</button>
+</h2>
 <div class="table-responsive">
   <table class="table">
   <thead>
@@ -18,9 +21,50 @@
       <td>{{ salepoint.countryId }}</td>
       <td>{{ salepoint.country }}</td>
       <td>{{ salepoint.countryCategory }}</td>
-      <td><i class="fa fa-eye"><i class="fa fa-times"></i></i></td>
+       <td>
+            <fa-icon [icon]="eyeIcon" (click)="this.EditSalePoint(salepoint.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+            <fa-icon [icon]="timeIcon" (click)="this.ShowDeleteConfirm(salepoint.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
+          </td>
+
     </tr>
   </tbody>
 </table>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
+
+ <app-modal #modal1 class="ij_modal">
+    <div class="app-modal-header">
+      Crear o editar un producto
+    </div>
+    <div class="app-modal-body">
+
+        <label for="description">Description</label>
+        <input type="text"  class="form-control" [(ngModel)]= "salePoint.description"/>
+
+        <label for="description">Dirección</label>
+        <input type="text"  class="form-control" [(ngModel)]= "salePoint.address"/>
+
+        <label>Country</label>
+        <select  class="form-control" [(ngModel)]="salePoint.countryId">
+          <option *ngFor="let country of this.countries" [value]="country.id" > {{country.description}} </option>
+        </select>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal1.hide()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="SaveChanges(); modal1.hide();">Guardar Cambios</button>
+    </div>
+  </app-modal>
+
+  <app-modal #modal2 class="ij_modal">
+    <div class="app-modal-header">
+      Eliminar:
+    </div>
+    <div class="app-modal-body">
+      Realmente desea eliminar el registro?
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default" (click)="modal2.hide()">No</button>
+      <button type="button" class="btn btn-primary" (click)="DeleteProduct(); modal2.hide();">Yes</button>
+    </div>
+  </app-modal>
+

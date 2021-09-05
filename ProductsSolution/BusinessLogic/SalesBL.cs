@@ -200,18 +200,6 @@ namespace BusinessLogic
                             countryCategory = c.category
                         };
 
-            //Parallel way!!!
-            /*
-            Parallel.ForEach(list, (salePoint) =>
-            {
-                listreturn.Add(new SalePointDTO()
-                {
-                    id = salePoint.Id,
-                    Description = salePoint.Description,
-                    Address = salePoint.Address
-                });
-            });
-            */
             return query.ToList();
         }
 
@@ -226,6 +214,41 @@ namespace BusinessLogic
                 SalePointId = entity.SalePointId
             };
             return saleDto;
+        }
+
+        public async Task<SalePointDTO> GetSalePointById(int id)
+        {
+            var sp = await Task.Run(() => salePointRepository.GetById(id));
+            var c = countryRepository.GetById(sp.CountryId);
+            
+            return new SalePointDTO()
+                        {
+                            id = sp.Id,
+                            Description = sp.Description,
+                            Address = sp.Address,
+                            country = c.description,
+                            countryId = c.Id,
+                            countryCategory = c.category
+                        };
+
+        }
+
+        public bool DeleteSalePoint(int id)
+        {
+            return this.salePointRepository.Delete(id);
+        }
+
+        public bool saveSalePoint(SalePointDTO salePointDTO)
+        {
+            SalePoint salePoint = new SalePoint()
+            {
+                Address = salePointDTO.Address,
+                CountryId = salePointDTO.countryId,
+                Description = salePointDTO.Description,
+                Id = salePointDTO.id
+            };
+
+            return this.salePointRepository.Save(salePoint);
         }
     }
 }

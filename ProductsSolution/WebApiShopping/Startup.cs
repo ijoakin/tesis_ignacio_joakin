@@ -44,7 +44,7 @@ namespace WebApiShopping
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Products API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Portal Ventas API", Version = "v1" });
             });
         }
 
@@ -61,6 +61,10 @@ namespace WebApiShopping
 
             app.UseAuthorization();
             app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

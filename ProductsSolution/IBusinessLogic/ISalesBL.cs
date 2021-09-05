@@ -14,7 +14,11 @@ namespace IBusinessLogic
         SaleDTO GetById(int id);
         Task<bool> SaveAsync(SaleDTO saleDto);
         Task<IList<SalePointDTO>> GetSalesPoints();
+        Task<SalePointDTO> GetSalePointById(int id);
+        
+        bool DeleteSalePoint(int id);
 
         PageServerSideDTO<SaleDTO> GetAllSalesPaginate(int page);
+        bool saveSalePoint(SalePointDTO salePointDTO);
     }
 }

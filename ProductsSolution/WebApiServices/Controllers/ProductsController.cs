@@ -28,7 +28,7 @@ namespace WebApiServices.Controllers
 
         [HttpPost("UploadFile")]
         [RequestFormLimits(MultipartBodyLengthLimit = 104857600)]
-        public async Task<IActionResult> UploadFile(IFormFile file)
+        public async Task<IActionResult> UploadFile(IFormFile file, string id)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace WebApiServices.Controllers
                 productDTO.price = 12;
                 productDTO.productTypeId = 1;
                 productDTO.userid = 1;
-                productDTO.imageData = memoryStream.ToArray();
+                productDTO.imagen = memoryStream.ToArray();
 
                 productsBL.Save(productDTO);
 

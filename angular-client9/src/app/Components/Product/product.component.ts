@@ -57,16 +57,9 @@ export class ProductComponent implements OnInit {
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('id', String(this.product.id));
+    this.productService.uploadFile(formData);
 
-    /*this.http.post('https://localhost:5001/api/upload', formData, {reportProgress: true, observe: 'events'})
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress)
-          this.progress = Math.round(100 * event.loaded / event.total);
-        else if (event.type === HttpEventType.Response) {
-          this.message = 'Upload success.';
-          this.onUploadFinished.emit(event.body);
-        }
-      });*/
   }
 
   public getPorductTypes() {
@@ -100,7 +93,7 @@ export class ProductComponent implements OnInit {
     this.productService.saveChanges(this.product).subscribe((data: boolean) => {
       // show toaster
       if (data) {
-        this.toastr.success('Saved successfully', 'Products!');
+        this.toastr.success('Se ha guardado correctamente', 'Products!');
         this.getAllProduct();
       }
 
@@ -113,7 +106,7 @@ export class ProductComponent implements OnInit {
   public DeleteProduct() {
     this.productService.DeleteProduct(String(this.product.id)).subscribe((data: boolean) => {
       // show toaster
-      this.toastr.success('Removed successfully', 'Products!');
+      this.toastr.success('Se ha eliminado correctamente', 'Products!');
       this.getAllProduct();
     });
   }

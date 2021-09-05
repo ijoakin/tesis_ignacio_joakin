@@ -118,7 +118,7 @@ namespace BusinessLogic
                     Description = productDTO.description,
                     ProductTypeId = productDTO.productTypeId,
                     Price = decimal.Parse(productDTO.price.ToString()),
-                    imageData = productDTO.imageData,
+                    imageData = productDTO.imagen,
                     UserId = 1
                 };
 

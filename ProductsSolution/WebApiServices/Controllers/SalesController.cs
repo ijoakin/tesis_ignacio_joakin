@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using DTO;
 using IBusinessLogic;
@@ -18,10 +19,12 @@ namespace WebApiServices.Controllers
         }
 
         [HttpGet("GetSales")]
-        [Produces("application/json")]
-        public IList<SaleDTO> GetSales()
+        [ProducesResponseType(typeof(List<SaleDTO>), (int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        public ActionResult<IList<SaleDTO>> GetSales()
         {
-            return _salesBl.GetAllSales();
+
+            return Ok(_salesBl.GetAllSales());
         }
 
         [HttpPost("SaveSale")]
@@ -44,16 +47,41 @@ namespace WebApiServices.Controllers
         }
 
         [HttpGet("GetSalesPoints")]
-        public async Task<IList<SalePointDTO>> GetSalesPoints()
+        [ProducesResponseType(typeof(IList<SalePointDTO>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<IList<SalePointDTO>>> GetSalesPoints()
         {
-            return await this._salesBl.GetSalesPoints();
+            return Ok(await this._salesBl.GetSalesPoints());
+        }
+
+        [HttpGet("GetById")]
+        [ProducesResponseType(typeof(SalePointDTO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<SalePointDTO>> GetById(string id)
+        {
+            return Ok(await this._salesBl.GetSalePointById(int.Parse(id)));
         }
 
         [HttpGet("GetAllSalesPaginate")]
+        [ProducesResponseType(typeof(PageServerSideDTO<SaleDTO>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public PageServerSideDTO<SaleDTO> GetAllSalesPaginate(int page)
         {
             return this._salesBl.GetAllSalesPaginate(page);
         }
+
+        [HttpDelete("deleteSalePoint")]
+        public bool deleteSalePoint(int id)
+        {
+            return this._salesBl.DeleteSalePoint(id);
+        }
+
+        [HttpPost("SaveSalePoint")]
+        public bool SaveSalePoint(SalePointDTO salePointDTO)
+        {
+            return this._salesBl.saveSalePoint(salePointDTO);
+        }
+
         [HttpPatch("PatchSales")]
         public IList<SaleDTO> PatchAllSales()
         {

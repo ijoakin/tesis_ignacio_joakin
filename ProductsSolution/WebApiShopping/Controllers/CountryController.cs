@@ -32,40 +32,5 @@ namespace WebApiShopping.Controllers
 
             return Ok(countryList);
         }
-
-        [HttpGet("getAllDistancesByIdProductIdCountry")]
-        [ProducesResponseType(typeof(DistanceDto), (int) HttpStatusCode.OK)]
-        public async Task<ActionResult<IList<DistanceDto>>> getAllDistancesByIdProductIdCountry(int productId, int countryId)
-        {
-            var salePoints = await this.salesBL.GetSalesPoints();
-            var salePoint = salePoints.Where(x => x.countryId == countryId).FirstOrDefault();
-
-            var distances = await this.countryBL.GetDistanceByProductBySalePointDtosAsync(productId, countryId);
-
-            if (distances == null) return NotFound();
-
-            return Ok(distances);
-        }
-
-        [HttpGet("GetAllCAtegories")]
-        [ProducesResponseType(typeof(CategoryDto), (int) HttpStatusCode.OK)]
-        [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IList<CategoryDto>>> GetAllCategories()
-        {
-            var categories = await this.countryBL.GetAllCategories();
-
-            return Ok(categories);
-        }
-
-        [HttpGet("getDistances")]
-        [ProducesResponseType(typeof(DistanceDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IList<DistanceDto>>> getDistances()
-        {
-            var distances = await this.countryBL.GetDistanceDtosAsync();
-
-            if (distances == null) return NotFound();
-
-            return Ok(distances);
-        }
     }
 }

@@ -13,7 +13,7 @@ namespace DTO
 
         public int userid { get; set; }
 
-        public Byte[] imageData { get; set; }
+        public Byte[] imagen { get; set; }
 
     }
 }

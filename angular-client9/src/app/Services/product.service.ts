@@ -1,6 +1,6 @@
 import { Product } from './../Model/Product';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ProductType } from '../Model/ProductType';
@@ -17,6 +17,20 @@ export class ProductService {
 
     return this.http.get<Product[]>(Url);
   }
+  public uploadFile(formData: FormData) {
+    const Url: string = environment.baseUrl + 'Products/UploadFile';
+
+    this.http.post(Url, formData, {reportProgress: true, observe: 'events'})
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress){}
+          //this.progress = Math.round(100 * event.loaded / event.total);
+        else if (event.type === HttpEventType.Response) {
+          // this.message = 'Upload success.';
+          // this.onUploadFinished.emit(event.body);
+        }
+      });
+  }
+
   public GetAllProductsSecure(): Observable<Product[]> {
     const Url: string = environment.baseUrl + 'products/getproductssecure';
 
