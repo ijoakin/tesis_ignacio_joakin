@@ -105,23 +105,23 @@ namespace BusinessLogic
                 var listPredictions = repositoryPredictions.GetAll();
 
                 var listToApplied = listPredictions.Where(x => !x.applied).ToList();
+                var productId = listToApplied.FirstOrDefault().ProductId;
+                var salepointid = listToApplied.FirstOrDefault().salepointid;
+                var totalForNextSevenDays = 0;
 
                 foreach (var pred in listToApplied)
                 {
-                    //find the stock for this prediction
-                    var list = repositoryStock.GetAll();
-                    var stock = list.Where(x => x.ProductId == pred.ProductId && x.SalePointId == pred.salepointid).FirstOrDefault();
-
-                    var dif = Math.Abs(stock.Amount - (pred.amount * 1.2));
-                    stock.Amount += Convert.ToInt32(dif);
-                    //stock.Amount += pred.amount;
-
-                    this.repositoryStock.Save(stock);
+                    totalForNextSevenDays += pred.amount;
 
                     pred.applied = true;
                     this.repositoryPredictions.Save(pred);
-
                 }
+
+                var list = repositoryStock.GetAll();
+                var stock = list.Where(x => x.ProductId == productId && x.SalePointId == salepointid).FirstOrDefault();
+                var dif = totalForNextSevenDays - stock.Amount;
+                stock.Amount += Convert.ToInt32(dif > 0? dif : 0);
+                this.repositoryStock.Save(stock);
 
                 return true;
             }
@@ -150,25 +150,29 @@ namespace BusinessLogic
 
         public async Task<bool> ApplyAllPredictions()
         {
+
             try
             {
                 var listPredictions = await repositoryPredictions.GetAllAsync();
 
                 var listToApplied = listPredictions.Where(x => !x.applied).ToList();
+                var productId = listToApplied.FirstOrDefault().ProductId;
+                var salepointid = listToApplied.FirstOrDefault().salepointid;
+                var totalPred = 0;
 
                 foreach (var pred in listToApplied)
                 {
-                    //find the stock for this prediction
-                    var list = await repositoryStock.GetAllAsync();
-                    var stock = list.Where(x => x.ProductId == pred.ProductId && x.SalePointId == pred.salepointid).FirstOrDefault();
-                    stock.Amount += pred.amount;
-
-                    this.repositoryStock.Save(stock);
+                    totalPred += pred.amount;
 
                     pred.applied = true;
                     this.repositoryPredictions.Save(pred);
-
                 }
+
+                var list = repositoryStock.GetAll();
+                var stock = list.Where(x => x.ProductId == productId && x.SalePointId == salepointid).FirstOrDefault();
+                var dif = totalPred - stock.Amount;
+                stock.Amount += Convert.ToInt32(dif > 0 ? dif : 0);
+                this.repositoryStock.Save(stock);
 
                 return true;
             }

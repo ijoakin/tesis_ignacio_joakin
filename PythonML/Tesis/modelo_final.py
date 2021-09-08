@@ -106,15 +106,15 @@ for productsAndSalePointRow in productsAndSalePointResult:
     print(len(df['2018']))
     meses = df.resample('M').mean()
     print(meses)
-    plt.plot(meses['2017'].values)
-    plt.plot(meses['2018'].values)
+    #plt.plot(meses['2017'].values)
+    #plt.plot(meses['2018'].values)
     #plt.show()
     #plt.rcParams['figure.figsize'] = (16, 9)
     #plt.style.use('fast')
     #verano2020 = df['2020-06-01':'2020-09-01']
     #plt.plot(verano2020.values)
     verano2018 = df['2018-06-01':'2018-09-01']
-    plt.plot(verano2018.values)
+    #plt.plot(verano2018.values)
 
     # plt.show()
     # Cargamos el dataset
@@ -150,9 +150,9 @@ for productsAndSalePointRow in productsAndSalePointResult:
 
     # Visualizamos al conjunto de validación (recordemos que eran 30 días)
     result_scatter = model.predict(x_val)
-    plt.scatter(range(len(y_val)), y_val, c='g')
-    plt.scatter(range(len(result_scatter)), result_scatter, c='r')
-    plt.title('validate')
+    #plt.scatter(range(len(y_val)), y_val, c='g')
+    #plt.scatter(range(len(result_scatter)), result_scatter, c='r')
+    #plt.title('validate')
     #plt.show()
 #
     queryUltimos = '''select top 15 CONVERT(date, [date]) as fecha from Searches order by [date] desc'''
@@ -195,7 +195,7 @@ for productsAndSalePointRow in productsAndSalePointResult:
 #
     prediccion = pd.DataFrame(inverted)
     prediccion.columns = ['pronostico']
-    prediccion.plot()
+    #prediccion.plot()
     #plt.show()
     print(prediccion.info())
 
