@@ -52,7 +52,9 @@ namespace WebApiServices.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<IList<SalePointDTO>>> GetSalesPoints()
         {
-            return Ok(await this._salesBl.GetSalesPoints());
+            var salesPoints = await this._salesBl.GetSalesPoints();
+
+            return Ok(salesPoints);
         }
 
         [HttpGet("GetById")]

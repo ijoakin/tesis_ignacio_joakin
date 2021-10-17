@@ -15,14 +15,17 @@ namespace BusinessLogic
         private IRepository<Stock> repositoryStock;
         private IRepository<Product> productRepository;
         private IRepository<SalePoint> salePointRepository;
+        private IRepository<Country> countryRepository;
 
         public StockBL(IRepository<Stock> _repositoryStock, 
             IRepository<Product> _productRepository,
-            IRepository<SalePoint> _salePointRepository)
+            IRepository<SalePoint> _salePointRepository,
+            IRepository<Country> _countryRepository)
         {
             this.repositoryStock = _repositoryStock ?? throw new ArgumentNullException(nameof(_repositoryStock));
             this.productRepository = _productRepository ?? throw new ArgumentNullException(nameof(_productRepository));
             this.salePointRepository = _salePointRepository ?? throw new ArgumentNullException(nameof(_salePointRepository));
+            this.countryRepository = _countryRepository ?? throw new ArgumentNullException(nameof(_countryRepository));
         }
 
         public bool Delete(int Id)
@@ -39,6 +42,7 @@ namespace BusinessLogic
             var query = from s in repositoryStock.GetQuery()
                          join p in productRepository.GetQuery() on s.ProductId equals p.Id
                          join sp in salePointRepository.GetQuery() on s.SalePointId equals sp.Id
+                         join c in countryRepository.GetQuery() on sp.CountryId equals c.Id
                          select new StockDTO
                          {
                              Id = s.Id,
@@ -46,7 +50,8 @@ namespace BusinessLogic
                              ProductId = s.ProductId,
                              ProductDescription = p.Description,
                              SalePointDescription = sp.Description,
-                             SalePointId = s.SalePointId
+                             SalePointId = s.SalePointId,
+                             Country = c.description
                          };
             return query.ToList();
         }

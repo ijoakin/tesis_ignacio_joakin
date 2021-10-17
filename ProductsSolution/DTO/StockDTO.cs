@@ -13,5 +13,7 @@ namespace DTO
         public string SalePointDescription { get; set; }
         public int Amount { get; set; }
 
+        public string Country { get; set; }
+
     }
 }

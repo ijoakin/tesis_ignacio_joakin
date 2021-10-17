@@ -81,7 +81,8 @@ export class DistanceComponent implements OnInit {
       productDescription: '',
       productId: 0,
       salePointDescription: '',
-      salePointId: 0
+      salePointId: 0,
+      country: ''
     }
     this.prediction = {
       id:0,

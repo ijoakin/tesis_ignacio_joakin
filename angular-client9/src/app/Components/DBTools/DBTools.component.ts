@@ -39,7 +39,7 @@ export class DBToolsComponent {
     this.yearSearch = '2020';
     this.porcessCount = 0;
     this.texto = new Array<string>();
-    this.addDataToConsole('connected to database');
+    this.addDataToConsole('Conectado a las Base de datos.');
   }
   addDataToConsole(data: string) {
     this.texto.push(data);
@@ -52,7 +52,7 @@ export class DBToolsComponent {
         this.loading = false;
         this.simulateSalesResult = data;
         if (data) {
-          this.toastr.success('SimulateSales successfully', 'Products!');
+          this.toastr.success('Simulación de ventas completa', 'Your Choice S.A.!');
         }
       });
       sleep(3000);
@@ -69,24 +69,25 @@ export class DBToolsComponent {
     });
   }
   CreateInitialData() {
-    this.addDataToConsole('Create initial data....');
+    this.addDataToConsole('Creando datos iniciales....');
     this.loading = true;
     this.dbToolsService.CreateInitialData().subscribe((data: boolean) => {
       this.loading = false;
       if (data) {
-        this.toastr.success('Initial Data was created successfully', 'Products!');
-        this.addDataToConsole('Initial Data was created successfully');
+        this.toastr.success('Datos creados correctamente', 'Your Choice S.A.!');
+        this.addDataToConsole('Datos creados correctamente');
       }
       this.SalePointStockDataResult = data;
     });
   }
   DbInitialSalePointStockData() {
-    this.addDataToConsole('init Initial Stock Data');
+    this.addDataToConsole('Inicialización del stock iniciada');
     this.loading = true;
     this.dbToolsService.DbInitialSalePointStockData().subscribe((data: boolean) => {
       this.loading = false;
+      this.addDataToConsole('Inicialización del stock finalizada');
       if (data) {
-        this.toastr.success('Simulate Stock Data complete', 'Products!');
+        this.toastr.success('Inicialización del stock finalizada', 'Products!');
       }
       this.SalePointStockDataResult = data;
     });
@@ -98,8 +99,8 @@ export class DBToolsComponent {
       this.simulateSearchesResult = data;
       if (data) {
         this.loading = false;
-        this.toastr.success('simulate searches complete', 'Products!');
-        this.addDataToConsole('simulate searches complete');
+        this.toastr.success('La simulación de las intenciones de compra ha terminado', 'Products!');
+        this.addDataToConsole('La simulación de las intenciones de compra ha terminado');
       }
     });
   }

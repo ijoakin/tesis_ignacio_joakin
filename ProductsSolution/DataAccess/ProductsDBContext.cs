@@ -9,15 +9,12 @@ namespace DataAccess
         {
             try
             {
-                //this.Database.EnsureDeleted();
                 this.Database.EnsureCreated();
             }
             catch (System.Exception ex)
             {
-                
+                //No Exception handle, the database is there
             }
-           
-            //DbInitializer.DbInitializerFirstUse(this);
         }
 
         private static DbContextOptions GetOptions(string connectionString)

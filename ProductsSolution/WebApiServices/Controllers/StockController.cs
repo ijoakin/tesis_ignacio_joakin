@@ -24,9 +24,12 @@ namespace WebApiServices.Controllers
 
         }
         [HttpGet("GetStockDTOs")]
-        public async Task<IList<StockDTO>> GetStockDTOs()
+        [ProducesResponseType(typeof(IList<StockDTO>), (int) HttpStatusCode.OK)]
+        public async Task<ActionResult<IList<StockDTO>>> GetStockDTOs()
         {
-            return await stockBL.GetAllStock();
+            var listStock = await stockBL.GetAllStock();
+
+            return Ok(listStock);
         }
 
         [HttpGet("GetStockBySalePointProduct")]

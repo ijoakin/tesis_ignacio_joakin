@@ -40,7 +40,8 @@ export class StockComponent implements OnInit {
       productDescription: '',
       productId: 0,
       salePointDescription: '',
-      salePointId: 0
+      salePointId: 0,
+      country: ''
     }
 
     this.productService.GetAllProducts().subscribe((data: Product[]) => this.products = data );

@@ -5,9 +5,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import pymssql as pms
 import pandas as pd
 import numpy as np
-
 import matplotlib.pylab as plt
-
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten
 from sklearn.preprocessing import MinMaxScaler
@@ -16,6 +14,13 @@ PASOS = 7
 salepointid = "92"
 productid = "14"
 EPOCHS = 80
+
+cnx = {
+    'host': 'WIN10',
+    'username': 'sa',
+    'password': 'Ignacio05',
+    'db': 'Products_01'
+}
 
 def to_str(var):
     if type(var) is list:
@@ -32,7 +37,7 @@ def crear_modeloFF():
     model.add(Dense(PASOS, input_shape=(1, PASOS),activation='tanh'))
     model.add(Flatten())
     model.add(Dense(1, activation='tanh'))
-    model.compile(loss='mean_absolute_error',optimizer='Adam',metrics=["mse"])
+    model.compile(loss='mean_absolute_error', optimizer='Adam', metrics=["mse"])
     model.summary()
     return model
 
@@ -41,6 +46,9 @@ def agregarNuevoValor(x_test, nuevoValor):
         x_test[0][0][i] = x_test[0][0][i + 1]
     x_test[0][0][x_test.shape[2] - 1] = nuevoValor
     return x_test
+
+def convertStr(s1):
+    return "'%s'" % s1
 
 # convert series to supervised learning
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
@@ -66,12 +74,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
         agg.dropna(inplace=True)
     return agg
 
-cnx = {
-    'host': 'WIN10',
-    'username': 'sa',
-    'password': 'Ignacio05',
-    'db': 'Products'
-}
+
 
 conn = pms.connect(cnx['host'], cnx['username'], cnx['password'], cnx['db'])
 
@@ -155,7 +158,15 @@ for productsAndSalePointRow in productsAndSalePointResult:
     #plt.title('validate')
     #plt.show()
 #
-    queryUltimos = '''select top 15 CONVERT(date, [date]) as fecha from Searches order by [date] desc'''
+
+    queryCurrentDate = '''select MONTH(DATEADD(DAY, 1, max(convert(date, [date])))) as currentmonth from Searches '''
+
+    dfCurrentDate = pd.read_sql(queryCurrentDate, conn)
+    for index, row in dfCurrentDate.iterrows():
+        currentmonth = row['currentmonth']
+
+
+    queryUltimos = '''select top 15 CONVERT(date, [date]) as fecha from Searches where MONTH(CONVERT(date, [date])) = ''' +str(currentmonth)+''' order by [date] desc'''
 
     dfultimos = pd.read_sql(queryUltimos, conn)
     dfultimos = dfultimos.set_index("fecha")
@@ -199,11 +210,22 @@ for productsAndSalePointRow in productsAndSalePointResult:
     #plt.show()
     print(prediccion.info())
 
+    queryCurrentDate = '''select max(convert(date, [date])) as currentday from Searches'''
+    dfCurrentDate = pd.read_sql(queryCurrentDate, conn)
+    currentdate = ''
+    for index, row in dfCurrentDate.iterrows():
+        currentdate = str(row['currentday'])
+
     for index, row in prediccion.iterrows():
         value = row['pronostico']
+
+        end_date = pd.to_datetime(currentdate) + pd.DateOffset(days=1)
+
         print(type(value))
         print(value)
         print(to_str(value))
+        print(currentdate)
+
         with conn.cursor() as cursor:
             query = '''
             INSERT INTO [dbo].[Predictions]
@@ -215,17 +237,20 @@ for productsAndSalePointRow in productsAndSalePointResult:
                ,[productid]
                ,[amount], applied)
              VALUES
-               ('2020-12-01'
-               ,''' + str(index) + '''
-               ,12
-               ,2020
+               (''' + convertStr(end_date) + '''
+               ,''' + str(end_date.day) + '''
+               ,''' + str(end_date.month) + '''
+               ,''' + str(end_date.year) + '''
                ,''' + str(salepointid) + '''
                ,''' + str(productid) + '''
                ,''' + to_str(value) + '''
                ,0)'''
             # Create a new record
+            # print(query)
             cursor.execute(query)
             conn.commit()
+            currentdate = str(end_date)
+
         #print(str(row['pronostico']))
 #
     prediccion.to_csv('pronostico-' + str(salepointid) + '-' + str(productid) + '.csv')

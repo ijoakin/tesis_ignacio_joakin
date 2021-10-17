@@ -4,11 +4,12 @@
 <table class="table">
   <thead>
     <th>id</th>
-    <th>productid</th>
-    <th>productDescription</th>
-    <th>salePointId</th>
-    <th>salePointDescription</th>
-    <th>amount</th>
+    <th>product id</th>
+    <th>Descripcion del producto</th>
+    <th>Punto de venta ID</th>
+    <th>Descripción del punto de venta </th>
+    <th>Cantidad</th>
+    <th>País</th>
     <th>Commands</th>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
       <td>{{stock.salePointId}}</td>
       <td>{{stock.salePointDescription}}</td>
       <td>{{stock.amount}}</td>
+      <td>{{stock.country}}</td>
       <td>
           <fa-icon [icon]="eyeIcon" (click)="this.EditStock(stock.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
           <fa-icon [icon]="timeIcon" (click)="this.ShowDeleteConfirm(stock.id)" data-toggle="modal" data-target="#myModal"></fa-icon>
