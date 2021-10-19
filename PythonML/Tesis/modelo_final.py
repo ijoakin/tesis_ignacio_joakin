@@ -19,7 +19,7 @@ cnx = {
     'host': 'WIN10',
     'username': 'sa',
     'password': 'Ignacio05',
-    'db': 'Products_01'
+    'db': 'Products'
 }
 
 def to_str(var):
@@ -134,7 +134,7 @@ for productsAndSalePointRow in productsAndSalePointResult:
 
     # dividimos la información en datos de entrenamiento y datos de prueba
     values = reframed.values
-    n_train_days = 315 + 289 - (30 + PASOS)
+    n_train_days = 415 + 315 - (30 + PASOS)
     train = values[:n_train_days, :]
     test = values[n_train_days:, :]
     # dividimos en entrada y salida
@@ -197,7 +197,7 @@ for productsAndSalePointRow in productsAndSalePointResult:
     for i in range(7):
         parcial = model.predict(x_test)
         results.append(parcial[0])
-        print(x_test)
+        #print(x_test)
         x_test = agregarNuevoValor(x_test, parcial[0])
 
     adimen = [x for x in results]
@@ -221,10 +221,10 @@ for productsAndSalePointRow in productsAndSalePointResult:
 
         end_date = pd.to_datetime(currentdate) + pd.DateOffset(days=1)
 
-        print(type(value))
-        print(value)
-        print(to_str(value))
-        print(currentdate)
+        #print(type(value))
+        #print(value)
+        #print(to_str(value))
+        #print(currentdate)
 
         with conn.cursor() as cursor:
             query = '''
