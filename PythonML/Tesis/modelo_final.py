@@ -122,7 +122,7 @@ for productsAndSalePointRow in productsAndSalePointResult:
     # plt.show()
     # Cargamos el dataset
     values = df.values
-    # nos aseguramos que todos los velores sean float 32, recordemos que CUDA y la grafica utiliza float
+    # nos aseguramos que todos los velores sean float 32, recordemos que usa CUDA y la grafica utiliza float
     values = values.astype('float32')
     # normalizamos las features
     scaler = MinMaxScaler(feature_range=(-1, 1))
@@ -134,7 +134,7 @@ for productsAndSalePointRow in productsAndSalePointResult:
 
     # dividimos la información en datos de entrenamiento y datos de prueba
     values = reframed.values
-    n_train_days = 415 + 315 - (30 + PASOS)
+    n_train_days = 400 + 300 - (30 + PASOS)
     train = values[:n_train_days, :]
     test = values[n_train_days:, :]
     # dividimos en entrada y salida

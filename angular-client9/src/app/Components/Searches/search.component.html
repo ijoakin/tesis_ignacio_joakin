@@ -4,30 +4,26 @@
 <table class="table">
   <thead>
     <th>id</th>
-    <th>searchtext</th>
-    <th>success</th>
-    <th>amount</th>
     <th>ProductId</th>
+    <th>Exito</th>
     <th>userid</th>
-    <th>productDescription</th>
-    <th>SalePointDescription</th>
+    <th>Producto</th>
+    <th>Cantidad</th>
+    <th>salePointDescription</th>
     <th>Month</th>
     <th>Year</th>
-
   </thead>
   <tbody>
     <tr *ngFor="let search of this.searches | paginate: { itemsPerPage: 10, currentPage: p }">
       <td>{{search.id}}</td>
-      <td>{{search.searchtext}}</td>
       <td>{{search.success}}</td>
-      <td>{{search.amount}}</td>
-      <td>{{search.ProductId}}</td>
+      <td>{{search.productId}}</td>
       <td>{{search.userid}}</td>
       <td>{{search.productDescription}}</td>
-      <td>{{search.SalePointDescription}}</td>
+      <td>{{search.amount}}</td>
+      <td>{{search.salePointDescription}}</td>
       <td>{{search.month}}</td>
       <td>{{search.year}}</td>
-
       <td>
         <i class="fa fa-eye" data-toggle="modal" data-target="#myModal"></i>
         <i class="fa fa-times" aria-hidden="true"></i>

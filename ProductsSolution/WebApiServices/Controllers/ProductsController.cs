@@ -63,6 +63,7 @@ namespace WebApiServices.Controllers
             {
                 var returnObject = await productsBL.GetAllProducts();
 
+                returnObject = returnObject.OrderBy(x => x.description).ToList();
                 return Ok(returnObject);
             }
             catch (Exception)

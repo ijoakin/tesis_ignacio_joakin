@@ -4,12 +4,13 @@
     <table class="table">
       <thead>
         <th>Id</th>
-        <th>productid</th>
-        <th>product</th>
+        <th>producto id</th>
+        <th>producto</th>
         <th>salepointid</th>
-        <th>salepoint</th>
-        <th>date</th>
-        <th>applied</th>
+        <th>Punto de Venta</th>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+        <th>Aplicar</th>
       </thead>
       <tbody>
         <tr *ngFor="let prediction of this.predictions  | paginate: { itemsPerPage: 10, currentPage: p }">
@@ -19,6 +20,7 @@
           <td>{{prediction.salepointid}}</td>
           <td>{{prediction.salepoint}}</td>
           <td>{{prediction.date}}</td>
+          <td>{{prediction.amount}}</td>
           <td><input type="checkbox" [(ngModel)]="prediction.applied" disabled/></td>
           <td>
             <i class="fa fa-eye" (click)="this.ApplyPrediction(prediction.id)" data-toggle="modal" data-target="#myModal"></i>

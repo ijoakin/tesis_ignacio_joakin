@@ -45,13 +45,7 @@ export class DistanceComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.getAllSalePoints();
-    //this.getAllDistances();
-    this.getAllProduct();
-    this.getAllCoutries();
-    this.ShowStock = false;
-
+  blankExecute() {
     this.country = {
       id: 0,
       description: '',
@@ -98,6 +92,17 @@ export class DistanceComponent implements OnInit {
       year: 0
     }
   }
+
+  ngOnInit() {
+    this.blankExecute();
+    this.getAllSalePoints();
+    //this.getAllDistances();
+    this.getAllProduct();
+    this.getAllCoutries();
+    this.ShowStock = false;
+
+
+  }
   public getAllDistances() {
     this.distanceService.getAllDistances()
     .subscribe((data: Distance[]) => {
@@ -139,9 +144,10 @@ export class DistanceComponent implements OnInit {
     //alert(this.country.id);
     var prd: Product;
     var stk: Stock;
+
     if (this.product.id > 0 && this.country.id >= 0) {
       this.ShowStock = true;
-
+      //this.blankExecute();
       this.stockService.GetStockBySalePointProduct(String(this.product.id), String(this.country.id))
         .subscribe((data: Stock) => {
           this.stock = data;

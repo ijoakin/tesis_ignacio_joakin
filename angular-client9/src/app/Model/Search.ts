@@ -3,9 +3,9 @@ export class Search {
   searchtext: string;
   success: boolean;
   amount: number;
-  ProductId: number;
+  productId: number;
   productDescription: string;
-  SalePointDescription: string;
+  salePointDescription: string;
   public month: string;
   public year: string;
 
@@ -13,9 +13,9 @@ export class Search {
     searchtext: string,
     success: boolean,
     amount: number,
-    ProductId: number,
+    productId: number,
     productDescription: string,
-    SalePointDescription: string,
+    salePointDescription: string,
     month: string,
     year: string
   ) {
@@ -23,9 +23,9 @@ export class Search {
     this.searchtext = searchtext;
     this.success = success;
     this.amount = amount;
-    this.ProductId = ProductId;
+    this.productId = productId;
     this.productDescription = productDescription;
-    this.SalePointDescription = SalePointDescription;
+    this.salePointDescription = salePointDescription;
     this.month = month;
     this.year = year;
   }
